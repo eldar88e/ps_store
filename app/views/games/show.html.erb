@@ -1,0 +1,32 @@
+<div class="one-game">
+  <div class="row">
+    <div class="col-6">
+      <div class="wrap-img">
+        <div style="background-image: url('<%= @game.img %>');" class="img-game"></div>
+      </div>
+    </div>
+    <div class="col-6">
+      <h1><%= @game.name %></h1>
+      <div><%= @game.price %>₽</div>
+      <h3>Характеристики.</h3>
+      <ul>
+        <li>Русский язык: <%= @game.rus_voice ? 'Да' : 'Нет' %></li>
+        <li>Русский субтитры: <%= @game.rus_screen ? 'Да' : 'Нет' %></li>
+        <li>Жанр: <%= @game.genre %></li>
+      </ul>
+    </div>
+    <div class="col-12">
+      <h2>Описание игры <%= @game.name %></h2>
+      <%= @game.content %>
+    </div>
+
+    <div class="col-12">
+      <h2>Недавно смотрели:</h2>
+      <div class="row">
+        <% @history.each do |game| %>
+          <%= render 'game', game: game %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
