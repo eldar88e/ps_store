@@ -5,7 +5,6 @@ ruby "3.2.2"
 gem "rails", "~> 7.0.8"
 
 gem "sprockets-rails"
-gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "jsbundling-rails"
 gem "turbo-rails"
@@ -15,6 +14,7 @@ gem "jbuilder"
 gem "redis", "~> 4.0"
 gem "bootsnap", require: false
 
+gem 'pg', '~> 1.5'
 gem 'csv'
 gem 'devise'
 gem 'dotenv-rails'

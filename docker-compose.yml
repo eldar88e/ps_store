@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+
+  pg:
+    image: postgres
+    container_name: pg
+    restart: always
+    env_file:
+      - ./env
+    expose:
+      - 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - ps-net
+
+  ps-app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: ps-app
+    depends_on:
+      - pg
+    links:
+      - pg
+    ports:
+      - '3000:3000'
+    env_file:
+      - ./env
+    networks:
+      - ps-net
+    restart: "unless-stopped"
+
+volumes:
+  pgdata:
+
+networks:
+  ps-net:

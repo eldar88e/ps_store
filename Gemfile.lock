@@ -397,7 +397,8 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
-  arm64-darwin-22
+  aarch64-linux-musl
+  arm64-darwin-23
 
 DEPENDENCIES
   activeadmin
@@ -420,7 +421,7 @@ DEPENDENCIES
   jsbundling-rails
   letter_opener
   listen
-  pg (~> 1.1)
+  pg (~> 1.5)
   pry
   puma (~> 5.0)
   rails (~> 7.0.8)
@@ -445,4 +446,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.22
+   2.5.3

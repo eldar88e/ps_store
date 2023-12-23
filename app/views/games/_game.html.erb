@@ -1,11 +1,11 @@
 <div class="col-6 col-md-4 col-lg-3">
   <div class="item-game">
     <div class="wrap-img">
-      <a href="games/<%= game.id.to_i %>" title="<%= game.name %>">
+      <a href="<%= game_path(game) %>" title="<%= game.name %>">
         <div style="background-image: url('<%= game.img %>');" class="img-game"></div>
       </a>
     </div>
-    <%= link_to game.name, "games/#{game.id.to_i}", title: game.name %>
+    <%= link_to game.name, game_path(game), title: game.name %>
     <div><%= game.price %>₽</div>
   </div>
 </div>
