@@ -25,5 +25,5 @@ RUN yarn install --check-files
 
 COPY ./ /app/
 
-#CMD /bin/ash
-CMD ./bin/dev
+CMD /bin/ash
+#CMD ./bin/dev
