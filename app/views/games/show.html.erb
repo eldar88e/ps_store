@@ -1,19 +1,18 @@
 <div class="one-game">
   <div class="row">
-    <div class="col-6">
+    <h1><%= @game.name %></h1>
+    <div class="col-12 col-md-6">
       <div class="wrap-img">
         <div style="background-image: url('<%= @game.img %>');" class="img-game"></div>
       </div>
     </div>
-    <div class="col-6">
-      <h1><%= @game.name %></h1>
-      <div><%= @game.price %>₽</div>
-      <h3>Характеристики.</h3>
+    <div class="col-12 col-md-6">
       <ul>
         <li>Русский язык: <%= @game.rus_voice ? 'Да' : 'Нет' %></li>
         <li>Русский субтитры: <%= @game.rus_screen ? 'Да' : 'Нет' %></li>
         <li>Жанр: <%= @game.genre %></li>
       </ul>
+      <div><%= @game.price %>₽</div>
     </div>
     <div class="col-12">
       <h2>Описание игры <%= @game.name %></h2>

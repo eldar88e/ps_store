@@ -43,7 +43,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'server.open-ps.ru', protocol: 'http' }
 
-  config.hosts << 'server.open-ps.ru:3000'
+  config.hosts << 'server.open-ps.ru'
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
