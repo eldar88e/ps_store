@@ -16,6 +16,7 @@ services:
       - ps-net
 
   ps-app:
+    image: web
     build:
       context: .
       dockerfile: ./Dockerfile
