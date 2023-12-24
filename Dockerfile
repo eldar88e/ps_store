@@ -18,7 +18,7 @@ COPY Gemfile* /app/
 RUN gem update --system 3.5.3
 RUN gem install bundler -v $(tail -n 1 Gemfile.lock)
 #RUN bundle config build.nokogiri --use-system-libraries
-RUN bundle check || bundle install --path vendor/bundle
+RUN bundle check || bundle install --path vendor/bundle --no-document
 
 COPY package.json yarn.lock /app/
 RUN yarn install --check-files

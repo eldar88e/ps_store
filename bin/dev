@@ -2,7 +2,7 @@
 
 if ! gem list foreman -i --silent; then
   echo "Installing foreman..."
-  gem install foreman
+  gem install foreman --install-dir vendor/bundle --no-document
 fi
 
 # Default to port 3000 if not specified
