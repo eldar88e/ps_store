@@ -11,22 +11,25 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     networks:
       - ps-net
 
-  ps-app:
+  web:
     image: web
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: ps-app
+    container_name: web
     depends_on:
       - pg
     links:
       - pg
     ports:
       - '3000:3000'
+    volumes:
+      - gem_cache:/app/vendor
+      - node_modules:/app/node_modules
     env_file:
       - ./.env
     networks:
@@ -34,7 +37,9 @@ services:
     restart: "unless-stopped"
 
 volumes:
-  pgdata:
+  db_data:
+  gem_cache:
+  node_modules:
 
 networks:
   ps-net:

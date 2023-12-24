@@ -19,14 +19,7 @@
       <h2>Описание игры <%= @game.name %></h2>
       <%= @game.content %>
     </div>
-
-    <div class="col-12">
-      <h2>Недавно смотрели:</h2>
-      <div class="row">
-        <% @history.each do |game| %>
-          <%= render 'game', game: game %>
-        <% end %>
-      </div>
-    </div>
   </div>
 </div>
+
+<%= render 'recently' %>

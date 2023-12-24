@@ -6,9 +6,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game    = Game.find(params[:id].to_i)
-    history  = session[:history] || []
-    @history = Game.where(id: history)
+    @game = Game.find(params[:id].to_i)
   end
 
   private

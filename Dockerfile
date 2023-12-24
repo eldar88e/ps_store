@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-alpine AS ps
+FROM ruby:3.2.2-alpine AS web
 
 ENV TZ="Europe/Moscow"
 RUN apk --update add \
@@ -23,7 +23,8 @@ RUN bundle check || bundle install --path vendor/bundle
 COPY package.json yarn.lock /app/
 RUN yarn install --check-files
 
-COPY ./ /app/
+COPY . ./
 
 #CMD /bin/ash
-CMD bin/dev
+#CMD bin/dev
+ENTRYPOINT './docker-entrypoint.sh'
