@@ -13,7 +13,8 @@ class GamesController < ApplicationController
 
   def store_history
     session[:history] ||= []
+    session[:history].delete_at(0) if session[:history].size > 4
     session[:history] << @game.id unless session[:history].include?(@game.id)
-    session[:history][-4..-1] = session[:history][-4..-1] if session[:history].size > 4
+    session[:history].delete_at(0) if session[:history].size > 4
   end
 end
