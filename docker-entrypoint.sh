@@ -7,4 +7,4 @@ if [ -f tmp/pids/server.pid ]; then
 fi
 
 RAILS_ENV=production bundle exec ./bin/rails assets:precompile
-./bin/dev
+bundle exec .bin/rails s -b 0.0.0.0
