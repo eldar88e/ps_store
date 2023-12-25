@@ -23,6 +23,7 @@ gem 'globalize'
 gem 'globalize-accessors'
 gem 'activeadmin'
 gem 'sassc-rails'
+gem 'kaminari'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

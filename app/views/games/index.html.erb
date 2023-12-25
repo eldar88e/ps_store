@@ -1,6 +1,11 @@
 <h1>Игры</h1>
-<% @games.each do |game| %>
-  <%= render 'game', game: game %>
-<% end %>
+
+<div class="row" id="game-list">
+  <%= turbo_stream.update 'game-list' do %>
+    <%= render @games %>
+  <% end %>
+</div>
+
+<%= paginate @games %>
 
 <%= render 'recently' %>

@@ -2,7 +2,8 @@ class GamesController < ApplicationController
   after_action :store_history, only: :show
 
   def index
-    @games = Game.all.limit(36)
+    # @games = Game.all.limit(36)
+    @games = Game.page(params[:page]).per(36)
   end
 
   def show
