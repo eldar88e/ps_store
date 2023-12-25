@@ -19,5 +19,4 @@ RUN bundle check || bundle install --path vendor/bundle
 COPY package.json yarn.lock /app/
 RUN yarn install --check-files
 
-COPY . ./
 ENTRYPOINT './docker-entrypoint.sh'
