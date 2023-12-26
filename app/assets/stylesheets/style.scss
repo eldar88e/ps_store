@@ -41,6 +41,26 @@ img {
       border-radius: 50%;
       border: 1px solid #575757;
     }
+
+    .platform {
+      background-image: url('ps5_ps4.svg');
+      height: 20px;
+      width: 60px;
+      background-size: cover;
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+    }
+
+    .platform.ps5 {
+      background-image: url('ps5.svg');
+      width: 37px;
+    }
+
+    .platform.ps4 {
+      background-image: url('ps4.svg');
+      width: 37px;
+    }
   }
 
   .title-game {
@@ -98,6 +118,10 @@ img {
 
 nav.pagination > span {
   margin: 0 3px;
+}
+
+#cart_items {
+  margin-bottom: 2em;
 }
 
 .cart-item {

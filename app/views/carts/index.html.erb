@@ -1,7 +1,7 @@
 <h1>Корзина.</h1>
 
-<% if cart_items.present? %>
-  <div id="cart_items">
+<div id="cart_items">
+  <% if cart_items.present? %>
     <div class="row">
       <% @games.each do |game| %>
         <%= render 'cart_items', game: game %>
@@ -15,9 +15,10 @@
         <%= button_to 'Очистить корзину', cart_delete_all_path, method: :delete  %>
       </div>
     </div>
-  </div>
-<% else %>
-  <h3>Ваша корзина пуста!</h3>
-<% end %>
+  <% else %>
+      <h3>Ваша корзина пуста!</h3>
+  <% end %>
+</div>
+
 
 <%= render '/games/recently' %>
