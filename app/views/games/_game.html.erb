@@ -9,7 +9,7 @@
             <div class="ru-flag" title="Присутствует русская озвучка или субтитры."></div>
           <% end %>
 
-          <div class="platform <%= game.platform&.downcase=='ps5' ? 'ps5' : ('ps4' if game.platform&.downcase=='ps4') %>" title="Поддерживаемая платформа <% game.platform %>"></div>
+          <div class="platform <%= game.platform&.downcase=='ps5' ? 'ps5' : ('ps4' if game.platform&.downcase=='ps4') %>" title="Поддерживаемые платформы: <%= game.platform %>"></div>
         </div>
       </a>
     </div>
