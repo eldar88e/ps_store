@@ -6,7 +6,9 @@
       </div>
 
       <div class="col-12 col-md-6">
-        <span><%= link_to "Корзина #{cart_items.size}", cart_path, title: 'Корзина' %></span>
+        <span>
+          <%= link_to "Корзина #{cart_items.size > 0 ? cart_items.size : ''}", cart_path, title: 'Корзина' %>
+        </span>
       </div>
     </div>
   </div>
