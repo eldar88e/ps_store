@@ -13,12 +13,12 @@ img {
     .no-img-game {
       background-image: url('no-img-game');
       background-size: cover;
+      position: relative;
     }
 
     .img-game {
       background-size: cover;
       background-repeat: no-repeat;
-      position: relative;
       height: 306px;
       transition: all 0.5s;
       @media screen and (max-width: 768px) {
@@ -28,18 +28,18 @@ img {
       &:hover {
         transform: scale(1.2);
       }
+    }
 
-      .ru-flag {
-        background-image: url('ru.svg');
-        background-size: cover;
-        position: absolute;
-        right: 25px;
-        top: 25px;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        border: 1px solid #575757;
-      }
+    .ru-flag {
+      background-image: url('ru.svg');
+      background-size: cover;
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid #575757;
     }
   }
 
@@ -55,6 +55,11 @@ img {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+    }
+    .price {
+      font-size: 19px;
+      margin: 5px 0;
+      font-weight: bold;
     }
   }
 }

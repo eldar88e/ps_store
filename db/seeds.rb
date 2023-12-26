@@ -15,6 +15,7 @@ games.each do |game|
   data[:touched_run_id] = 1
   data[:rus_screen]     = game[6] == 'Да'
   data[:rus_voice]      = game[7] == 'Да'
+  data[:nps_id]          = game[5].split('/')[11]
 
   Game.create!(data)
 end

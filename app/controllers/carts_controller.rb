@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   include ApplicationHelper
+  include GamesHelper
   before_action :cart_items, only: [:create, :destroy, :delete_all]
 
   def index

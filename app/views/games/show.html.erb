@@ -3,7 +3,7 @@
     <h1><%= @game.name %></h1>
     <div class="col-12 col-md-6">
       <div class="wrap-img">
-        <%= image_tag @game.img, alt: @game.name, title: @game.name %>
+        <%= image_tag "https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/#{@game.nps_id}/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=636&h=636", alt: @game.name, title: @game.name %>
       </div>
     </div>
     <div class="col-12 col-md-6">

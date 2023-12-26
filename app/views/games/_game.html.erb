@@ -3,18 +3,18 @@
     <div class="wrap-img">
       <a href="<%= game_path(game) %>" title="<%= game.name %>">
         <div class="no-img-game">
-          <div style="background-image: url('<%= game.img %>');" class="img-game">
-            <% if game.rus_screen || game.rus_voice %>
-              <div class="ru-flag"></div>
-            <% end %>
+          <div style="background-image: url('https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/<%= game.nps_id %>/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=346&h=346');" class="img-game">
           </div>
+          <% if game.rus_screen || game.rus_voice %>
+            <div class="ru-flag" title="Присутствует русская озвучка или субтитры."></div>
+          <% end %>
         </div>
       </a>
     </div>
 
     <div class="title-game">
       <%= link_to game.name, game_path(game), title: game.name %>
-      <div><%= game.price %>₽</div>
+      <div class="price"><%= game.price %>₽</div>
 
       <%= render 'carts/create_cart_item', game_id: game.id %>
     </div>

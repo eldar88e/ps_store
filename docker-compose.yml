@@ -24,6 +24,7 @@ services:
     container_name: web
     environment:
       RAILS_ENV: production
+      TZ: Europe/Moscow
     depends_on:
       - pg
     ports:
