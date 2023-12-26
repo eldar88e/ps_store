@@ -11,8 +11,12 @@
         <li>Русский язык: <%= @game.rus_voice ? 'Да' : 'Нет' %></li>
         <li>Русский субтитры: <%= @game.rus_screen ? 'Да' : 'Нет' %></li>
         <li>Жанр: <%= @game.genre %></li>
+        <li>Тип: </li>
+        <li>Дата реализа: </li>
+        <li>Издатель: </li>
       </ul>
       <span class="price"><%= @game.price %>₽</span>
+      <%= render 'carts/create_cart_item', game_id: @game.id %>
     </div>
     <div class="description col-12">
       <h2>Описание.</h2>

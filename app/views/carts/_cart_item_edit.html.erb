@@ -1,0 +1,4 @@
+<form action="<%= edite_cart_items_path(game_id) %>" method="patch" >
+  <%= hidden_field_tag :action_cart, action_cart %>
+  <button type="submit"><%= action_cart == 'up' ? '+' : '-' %></button>
+</form>

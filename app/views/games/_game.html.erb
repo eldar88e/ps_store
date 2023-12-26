@@ -2,10 +2,21 @@
   <div class="item-game">
     <div class="wrap-img">
       <a href="<%= game_path(game) %>" title="<%= game.name %>">
-        <div style="background-image: url('<%= game.img %>');" class="img-game"></div>
+        <div class="no-img-game">
+          <div style="background-image: url('<%= game.img %>');" class="img-game">
+            <% if game.rus_screen || game.rus_voice %>
+              <div class="ru-flag"></div>
+            <% end %>
+          </div>
+        </div>
       </a>
     </div>
-    <%= link_to game.name, game_path(game), title: game.name %>
-    <div><%= game.price %>₽</div>
+
+    <div class="title-game">
+      <%= link_to game.name, game_path(game), title: game.name %>
+      <div><%= game.price %>₽</div>
+
+      <%= render 'carts/create_cart_item', game_id: game.id %>
+    </div>
   </div>
 </div>

@@ -1,0 +1,59 @@
+<h1>Корзина.</h1>
+
+<% if cart_items.present? %>
+  <div id="cart_items">
+    <div class="row">
+      <% count = 0 %>
+      <% @games.each do |game| %>
+        <div class="col-12 cart-item">
+          <div class="row" style="align-items: center;">
+
+            <div class="col-4 col-md-1">
+              <div class="wrap-img">
+                <a href="<%= game_path(game) %>" title="<%= game.name %>">
+                  <%= image_tag game.img, alt: game.name, title: game.name %>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-4 col-md-2">
+              <span><%= game.name %></span>
+            </div>
+
+            <div class="col-4 col-md-2">
+              <span>Цена: <%= game.price %></span>
+            </div>
+
+            <div class="col-4 col-md-3">
+              <div class="row">
+                <div class="col-4 col-md-2"><%= render 'cart_item_edit', game_id: game.id, action_cart: 'down' %></div>
+                <div class="col-4 col-md-2"><%= cart_items.count(game.id) %></div>
+                <div class="col-4 col-md-2"><%= render 'cart_item_edit', game_id: game.id, action_cart: 'up' %></div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-2">
+              <% count += (game.price * cart_items.count(game.id)) %>
+              <span>Cтоимость: <%= game.price * cart_items.count(game.id) %></span>
+            </div>
+
+            <div class="col-2 col-md-1">
+              <%= button_to 'X', delete_cart_items_path(game.id), method: :delete  %>
+            </div>
+
+          </div>
+        </div>
+      <% end %>
+
+      <div class="col-12 cart-item">
+        <div>Итого: <%= count %></div>
+      </div>
+
+      <div class="col-12 cart-item">
+        <%= button_to 'Очистить корзину', cart_delete_all_path, method: :delete  %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <h3>Ваша корзина пуста!</h3>
+<% end %>
