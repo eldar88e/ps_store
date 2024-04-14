@@ -16,7 +16,7 @@ services:
       - store-net
 
   web:
-    image: web
+    image: web-store
     build:
       context: .
       dockerfile: ./Dockerfile
