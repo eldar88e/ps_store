@@ -40,6 +40,8 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./public:/app
+    ports:
+      - "83:83"
     depends_on:
       - web
     networks:
