@@ -6,7 +6,7 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
 
-  config.action_mailer.default_url_options = { host: 'server.open-ps.ru', protocol: 'http' }
+  config.action_mailer.default_url_options = { host: 'store.open-ps.ru', protocol: 'http' }
 
   #config.hosts << 'server.open-ps.ru'
   config.hosts = %w[store.open-ps.ru web localhost]
