@@ -20,11 +20,14 @@
     </div>
 
     <div class="col-4 col-md-2">
-      <div class="row">
+      <!--<div class="row">
         <div class="col-4"><%= render 'cart_item_edit', game_id: game.id, action_cart: 'down' %></div>
-        <div class="col-4"><%= cart_items.count(game.id) %>шт.</div>
+        <div class="col-4"> -->
+          <input type="number" name="quantity[product<% game.id %>]" value="<%= cart_items.count(game.id) %>" style="width: 50px;">
+          <span>шт.</span>
+          <!--</div>
         <div class="col-4"><%= render 'cart_item_edit', game_id: game.id, action_cart: 'up' %></div>
-      </div>
+      </div>-->
     </div>
 
     <div class="col-6 col-md-1">

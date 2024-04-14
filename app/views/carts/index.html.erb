@@ -2,19 +2,26 @@
 
 <div id="cart_items">
   <% if cart_items.present? %>
-    <div class="row">
-      <% @games.each do |game| %>
-        <%= render 'cart_items', game: game %>
-      <% end %>
+    <form id="cart-form" action="<%= order_path %>" method="post">
+      <div class="row">
+        <% @games.each do |game| %>
+          <%= render 'cart_items', game: game %>
+        <% end %>
 
-      <div class="col-12 cart-item">
-        <div>Итого: <%= cart_items.size %>шт. на сумму <%= @count %>₽</div>
-      </div>
+        <div class="col-12 cart-item">
+          <div>Итого: <%= cart_items.size %>шт. на сумму <%= @count %>₽</div>
+        </div>
 
-      <div class="col-12 cart-item">
-        <%= button_to 'Очистить корзину', cart_delete_all_path, method: :delete  %>
+        <div class="col-12 cart-item">
+          <%= button_to 'Очистить корзину', cart_delete_all_path, method: :delete  %>
+        </div>
+
+        <div class="col-12 cart-item">
+          <button type="submit" title="Oформить заказ">Oформить заказ</button>
+        </div>
+
       </div>
-    </div>
+    </form>
   <% else %>
       <h3>Ваша корзина пуста!</h3>
   <% end %>

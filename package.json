@@ -9,6 +9,7 @@
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.2",
     "esbuild": "^0.19.9",
+    "esbuild-rails": "^1.0.7",
     "nodemon": "^3.0.2",
     "owl.carousel2": "^2.2.2",
     "postcss": "^8.4.32",

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_26_052722) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_27_073950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_26_052722) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.string "middle_name"
+    t.string "email"
+    t.string "phone", limit: 10
+    t.boolean "account"
+    t.string "login_account"
+    t.string "pass_account"
+    t.string "country_account"
+    t.string "remote_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "ps_id"
@@ -62,4 +76,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_26_052722) do
     t.string "nps_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.string "product_type"
+    t.integer "product_id"
+    t.integer "quantity"
+    t.decimal "unit_price", precision: 10, scale: 2
+    t.decimal "total_price", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+    t.index ["product_type"], name: "index_order_items_on_product_type"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "client_id"
+    t.string "status"
+    t.decimal "total_amount", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_orders_on_client_id"
+  end
+
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "clients"
 end
