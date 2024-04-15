@@ -15,12 +15,12 @@ services:
     networks:
       - store-net
 
-  web:
-    image: web-store
+  store:
+    image: store
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: web-store
+    container_name: store
     environment:
       RAILS_ENV: production
       TZ: Europe/Moscow
@@ -45,7 +45,7 @@ services:
     ports:
       - "83:80"
     depends_on:
-      - web
+      - store
     networks:
       - store-net
       - proxy-net
