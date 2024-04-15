@@ -26,6 +26,8 @@ services:
       TZ: Europe/Moscow
     depends_on:
       - pg
+    ports:
+      - "84:3000"
     volumes:
       - ./public:/app/public
       - gems:/usr/local/bundle
