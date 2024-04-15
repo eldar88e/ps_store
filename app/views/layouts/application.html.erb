@@ -12,9 +12,11 @@
 
   <body>
     <%= render '/partial/header' %>
-    <div class="container">
-        <%= yield %>
-    </div>
+    <main>
+      <div class="container">
+          <%= yield %>
+      </div>
+    </main>
     <%= render '/partial/footer' %>
   </body>
 </html>

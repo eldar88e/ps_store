@@ -2,10 +2,9 @@
 
 <div id="cart_items">
   <% if cart_items.present? %>
-    <form id="cart-form" action="<%= order_path %>" method="post">
       <div class="row">
         <% @games.each do |game| %>
-          <%= render 'cart_items', game: game %>
+          <%= render 'cart_item', game: game %>
         <% end %>
 
         <div class="col-12 cart-item">
@@ -22,11 +21,11 @@
         </div>
 
         <div class="col-6 col-md-2 cart-item">
-          <button type="submit" title="Oформить заказ" class="btn btn-primary">Oформить заказ</button>
+          <a href="#" title="Oформить заказ" class="btn btn-primary">Oформить заказ</a>
         </div>
 
       </div>
-    </form>
+
   <% else %>
       <h3>Ваша корзина пуста!</h3>
   <% end %>

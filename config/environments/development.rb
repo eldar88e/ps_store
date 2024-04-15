@@ -41,9 +41,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'store.open-ps.ru', protocol: 'http' }
-
-  config.hosts = %w[store.open-ps.ru store localhost]
+  #config.action_mailer.default_url_options = { host: 'store.open-ps.ru', protocol: 'http' }
+  #config.hosts = %w[store.open-ps.ru store localhost]
+  config.hosts << "127.0.0.1"
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

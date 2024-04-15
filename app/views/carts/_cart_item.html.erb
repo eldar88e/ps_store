@@ -1,4 +1,4 @@
-<div class="col-12 cart-item">
+<div class="col-12 cart-item" id="cart-item-<%= game.id %>">
   <div class="row" style="align-items: center;">
 
     <div class="col-4 col-md-1">
@@ -23,7 +23,7 @@
       <!--<div class="row">
         <div class="col-4"><%= render 'cart_item_edit', game_id: game.id, action_cart: 'down' %></div>
         <div class="col-4"> -->
-          <input type="number" class="form-control" name="quantity[product<% game.id %>]" value="<%= cart_items.count(game.id) %>" style="width: 50px; display: inline-block;">
+          <input type="number" class="form-control" name="quantity[product<% game.id %>]" value="<%= cart_items.count(game.id) %>" style="width: 60px; display: inline-block;">
           <span>шт.</span>
           <!--</div>
         <div class="col-4"><%= render 'cart_item_edit', game_id: game.id, action_cart: 'up' %></div>
@@ -36,7 +36,7 @@
     </div>
 
     <div class="col-2 col-md-1">
-      <%= button_to delete_cart_items_path(game.id), method: :delete, class: 'btn btn-danger' do %>
+      <%= button_to delete_cart_items_path(id: game.id, name: game.name), method: :delete, class: 'btn btn-danger' do %>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
           <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
         </svg>

@@ -9,8 +9,12 @@ class CartsController < ApplicationController
 
   def create
     session[:cart_items] << params[:game_id].to_i
+    game = Game.find(params[:game_id])
 
-    redirect_to request.referer || root_path
+    render turbo_stream: [
+      turbo_stream.update(:cart_counter, partial: 'carts/cart_counter'),
+      success_notice("Товар #{game.name} был успешно добавлен в корзину.")
+    ]
   end
 
   def update
@@ -26,8 +30,10 @@ class CartsController < ApplicationController
 
   def destroy
     session[:cart_items].reject! { |num| num == params[:id].to_i }
+    game = params[:name]
 
-    redirect_to cart_path
+    msg = "Товар #{game} был успешно удален из корзины."
+    render turbo_stream: [ turbo_stream.remove("cart-item-#{params[:id]}"), success_notice(msg)]
   end
 
   def delete_all

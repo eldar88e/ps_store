@@ -1,4 +1,14 @@
 <header>
+  <%= turbo_frame_tag :notices, class: 'notice-group', data: { controller: "notices" } do %>
+    <% flash.each do |key, value| %>
+      <% [value].flatten.each do |i| %>
+        <div class="alert alert-<%= key %>" role="alert">
+          <%= i %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
   <div class="container" style="margin-bottom: 3em; margin-top: 2em">
     <div class="row">
       <div class="col-12 col-md-6">
@@ -6,9 +16,9 @@
       </div>
 
       <div class="col-12 col-md-6">
-        <span>
-          <%= link_to "Корзина #{cart_items.size > 0 ? cart_items.size : ''}", cart_path, title: 'Корзина' %>
-        </span>
+        <%= turbo_frame_tag :cart_counter, class: '' do %>
+          <%= render 'carts/cart_counter' %>
+        <% end %>
       </div>
     </div>
   </div>
