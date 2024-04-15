@@ -8,12 +8,12 @@ class CartsController < ApplicationController
   end
 
   def create
-    session[:cart_items] << params[:game_id].to_i
-    game = Game.find(params[:game_id])
+    session[:cart_items] << params[:id].to_i
+    game = params[:name]
 
     render turbo_stream: [
       turbo_stream.update(:cart_counter, partial: 'carts/cart_counter'),
-      success_notice("Товар #{game.name} был успешно добавлен в корзину.")
+      success_notice("Товар #{game} был успешно добавлен в корзину.")
     ]
   end
 

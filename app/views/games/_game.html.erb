@@ -18,7 +18,7 @@
       <%= link_to game.name, game_path(game), title: game.name %>
       <div class="price"><%= game.price %>₽</div>
 
-      <%= render 'carts/create_cart_item', game_id: game.id %>
+      <%= render 'carts/create_cart_item', game: game %>
     </div>
   </div>
 </div>

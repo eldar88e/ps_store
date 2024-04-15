@@ -17,7 +17,7 @@
         <li>Издатель: </li>
       </ul>
       <span class="price"><%= @game.price %>₽</span>
-      <%= render 'carts/create_cart_item', game_id: @game.id %>
+      <%= render 'carts/create_cart_item', game: @game %>
     </div>
     <div class="description col-12">
       <h2>Описание.</h2>
