@@ -2,10 +2,10 @@ class CartsController < ApplicationController
   include ApplicationHelper
   include GamesHelper
   before_action :cart_items, only: [:create, :destroy, :delete_all]
+  before_action :set_games, only: [:index]
+  before_action :set_total_price, only: [:index]
 
-  def index
-    @games = Game.where(id: cart_items.uniq)
-  end
+  def index; end
 
   def create
     session[:cart_items] << params[:id].to_i
@@ -31,14 +31,30 @@ class CartsController < ApplicationController
   def destroy
     session[:cart_items].reject! { |num| num == params[:id].to_i }
     game = params[:name]
+    set_games
+    set_total_price
 
     msg = "Товар #{game} был успешно удален из корзины."
-    render turbo_stream: [ turbo_stream.remove("cart-item-#{params[:id]}"), success_notice(msg)]
+    render turbo_stream: [
+      turbo_stream.remove("cart-item-#{params[:id]}"),
+      success_notice(msg),
+      turbo_stream.update(:cart_result, partial: 'carts/cart_result', locals: { total_price: @total_price })
+    ]
   end
 
   def delete_all
     session[:cart_items] = []
 
     redirect_to cart_path
+  end
+
+  private
+
+  def set_total_price
+    @total_price = @games.reduce(0) { |result, game| result + (game.price * cart_items.count(game.id)) }
+  end
+
+  def set_games
+      @games = Game.where(id: cart_items.uniq)
   end
 end

@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'e6d8c370415f026e280d3d7c7d2f0087f82b561d124564e9d28d40638984d8e9b6c9270160169b0eed8b552d790c270b12b7eca584016ecce697ffd405232b6f'
+  # config.secret_key = '574471d51899569c2ab554e68823c2af0dc4bd8390f83f6f113987e607ef97e7806b3ee31844cc64b9e9aa30591837c983dcf2d4a7335060545e425fa2ed38e1'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'noreply@store.open-ps.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '8160b171fe5c57cb3c0c263058109b6d56c78c37b1febc39780a411db0cf1cd31d22102fa4c70e269a9a20152a28366c198a601fadf6bb015592084f4b3a26b9'
+  # config.pepper = '2c4d9c680dddea47d6ddf5fafb675442d17422da1d2a4c43d9c8ab11d2027b80f24aae592d9142679d333ec09275e8c0fe44be88abef1ac1cccd7f894aa2d4bc'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -178,7 +178,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 6..128
+  config.password_length = 8..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -272,6 +272,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :google_oauth2,
+                  Rails.application.credentials.dig(:GOOGLE_OAUTH_CLIENT_ID),
+                  Rails.application.credentials.dig(:GOOGLE_OAUTH_CLIENT_SECRET)
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

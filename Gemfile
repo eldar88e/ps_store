@@ -16,7 +16,6 @@ gem "bootsnap", require: false
 
 gem 'pg', '~> 1.5'
 gem 'csv'
-gem 'devise'
 gem 'dotenv-rails'
 gem 'rails-i18n'
 gem 'globalize'
@@ -24,9 +23,9 @@ gem 'globalize-accessors'
 gem 'activeadmin'
 gem 'sassc-rails'
 gem 'kaminari'
-
-# Use Sass to process CSS
-# gem "sassc-rails"
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

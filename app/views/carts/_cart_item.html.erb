@@ -31,7 +31,6 @@
     </div>
 
     <div class="col-6 col-md-1">
-      <% @count ||= 0; @count += (game.price * cart_items.count(game.id)) %>
       <span><%= game.price * cart_items.count(game.id) %>₽</span>
     </div>
 

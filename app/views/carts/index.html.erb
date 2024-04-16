@@ -7,8 +7,8 @@
           <%= render 'cart_item', game: game %>
         <% end %>
 
-        <div class="col-12 cart-item">
-          <div>Итого: <%= cart_items.size %>шт. на сумму <%= @count %>₽</div>
+        <div class="col-12 cart-item" id="cart_result">
+          <%= render 'carts/cart_result', locals: { total_price: @total_price } %>
         </div>
 
         <div class="col-6 col-md-1 cart-item">
