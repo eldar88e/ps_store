@@ -1,3 +1,4 @@
+
 class Client < ApplicationRecord
   has_many :orders
   validates :email, uniqueness: true

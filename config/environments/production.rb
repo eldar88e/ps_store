@@ -7,6 +7,11 @@ Rails.application.configure do
   config.cache_classes = true
 
   config.action_mailer.default_url_options = { host: 'store.open-ps.ru', protocol: 'http' }
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.sendmail_settings = {
+    location: '/usr/sbin/sendmail',
+    arguments: '-i -t'
+  }
 
   #Rails.application.routes.default_url_options[:host] = 'store.open-ps.ru'
   config.hosts = %w[store.open-ps.ru store localhost]

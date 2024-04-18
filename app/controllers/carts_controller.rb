@@ -11,10 +11,12 @@ class CartsController < ApplicationController
     session[:cart_items] << params[:id].to_i
     game = params[:name]
 
+    # cart_items_update = request.path == '/cart' ? [turbo_stream.update('cart_items')] : []
+
     render turbo_stream: [
       turbo_stream.update(:cart_counter, partial: 'carts/cart_counter'),
       success_notice("Товар #{game} был успешно добавлен в корзину.")
-    ]
+    ] # + cart_items_update
   end
 
   def update
