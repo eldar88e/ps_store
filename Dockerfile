@@ -22,5 +22,5 @@ COPY package.json yarn.lock /app/
 RUN yarn install --check-files
 
 COPY . /app/
-
+RUN apk add --no-cache sendmail
 ENTRYPOINT ["./docker-entrypoint.sh"]

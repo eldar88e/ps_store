@@ -10,7 +10,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.sendmail_settings = {
     location: '/usr/sbin/sendmail',
-    arguments: '-i -t'
+    arguments: '-i -t -f "noreply@store.open-ps.com"'
   }
 
   #Rails.application.routes.default_url_options[:host] = 'store.open-ps.ru'
