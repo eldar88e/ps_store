@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+
   def error_notice(msg)
     render turbo_stream: send_notice(msg, 'danger')
   end
