@@ -41,7 +41,9 @@
       <% if user_signed_in? %>
           <div style="display: flex; align-items: center;">
             <div style="margin-right: 5px;">
-              <span>Hello<span style="font-weight: bold;"> <%= current_user.full_name || current_user.email %></span>!</span>
+              <span>
+                Hello<span style="font-weight: bold;"> <%= link_to (current_user.full_name || current_user.email), user_path(current_user) %></span>!
+              </span>
               <% if current_user.avatar_url.present? %>
                 <img src=<%= current_user.avatar_url %> alt="user-avatar" class="user-avatar"/>
               <% end %>
