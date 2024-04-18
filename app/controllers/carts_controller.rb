@@ -38,14 +38,22 @@ class CartsController < ApplicationController
     render turbo_stream: [
       turbo_stream.remove("cart-item-#{params[:id]}"),
       success_notice(msg),
+      turbo_stream.update(:cart_counter, partial: 'carts/cart_counter'),
       turbo_stream.update(:cart_result, partial: 'carts/cart_result', locals: { total_price: @total_price })
     ]
   end
 
   def delete_all
     session[:cart_items] = []
+    set_games
+    set_total_price
 
-    redirect_to cart_path
+    render turbo_stream: [
+      turbo_stream.update(:cart_items),
+      turbo_stream.append(:cart_items, '<h3>Ваша корзина пуста!</h3>'),
+      success_notice("Корзина была успешно очищена!"),
+      turbo_stream.update(:cart_counter, partial: 'carts/cart_counter')
+    ]
   end
 
   private

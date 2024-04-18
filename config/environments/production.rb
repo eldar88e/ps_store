@@ -8,7 +8,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'store.open-ps.ru', protocol: 'http' }
 
-  #config.hosts << 'server.open-ps.ru'
+  #Rails.application.routes.default_url_options[:host] = 'store.open-ps.ru'
   config.hosts = %w[store.open-ps.ru store localhost]
 
   # Eager load code on boot. This eager loads most of Rails and
