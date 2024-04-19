@@ -131,6 +131,12 @@ GEM
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
     csv (3.3.0)
+    database_cleaner (2.0.2)
+      database_cleaner-active_record (>= 2, < 3)
+    database_cleaner-active_record (2.1.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.3.4)
     debug_inspector (1.2.0)
     devise (4.9.4)
@@ -262,8 +268,6 @@ GEM
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
-    omniauth-facebook (9.0.0)
-      omniauth-oauth2 (~> 1.2)
     omniauth-google-oauth2 (1.1.2)
       jwt (>= 2.0)
       oauth2 (~> 2.0)
@@ -497,6 +501,7 @@ DEPENDENCIES
   chusaku
   cssbundling-rails
   csv
+  database_cleaner
   devise
   dotenv-rails
   factory_bot_rails
@@ -509,7 +514,6 @@ DEPENDENCIES
   letter_opener
   listen
   omniauth
-  omniauth-facebook
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg

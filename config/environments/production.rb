@@ -7,10 +7,15 @@ Rails.application.configure do
   config.cache_classes = true
 
   config.action_mailer.default_url_options = { host: 'store.open-ps.ru', protocol: 'http' }
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.sendmail_settings = {
-    location: '/usr/sbin/sendmail',
-    arguments: '-i -t -f "noreply@store.open-ps.com"'
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    domain: 'store.open-ps.ru',
+    user_name: 'apikey',       # Используйте 'apikey' как имя пользователя
+    password: ENV['SENDGRID_API_KEY'],  # Установите API ключ SendGrid
+    authentication: :plain,
+    enable_starttls_auto: true
   }
 
   #Rails.application.routes.default_url_options[:host] = 'store.open-ps.ru'
