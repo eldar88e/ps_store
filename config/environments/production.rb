@@ -11,7 +11,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: 587,
-    domain: 'store.open-ps.ru',
+    domain: 'em6363.store.open-ps.ru',
     user_name: 'apikey',       # Используйте 'apikey' как имя пользователя
     password: ENV['SENDGRID_API_KEY'],  # Установите API ключ SendGrid
     authentication: :plain,
