@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   delete '/cart/:id', to: 'carts#destroy', as: 'delete_cart_items'
   patch	'/cart/:id', to:	'carts#update', as: 'edite_cart_items'
 
-  post '/order', to: 'orders#create'
+  resources :orders, only: [:new, :create]
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

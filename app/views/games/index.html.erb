@@ -1,5 +1,7 @@
 <h1>Игры</h1>
 
+<%= render partial: 'sort_games' %>
+
 <div class="row" id="game-list">
   <%= turbo_stream.update 'game-list' do %>
     <%= render @games %>

@@ -2,6 +2,10 @@ img {
   width: 100%;
 }
 
+.logo {
+  margin: 5px 0px 10px;
+}
+
 .item-game {
   margin: 10px 0;
   transition: all 0.5s;
@@ -289,4 +293,13 @@ li.page-item.page.current {
   background-color: #0d6efd;
   padding: .375rem .75rem;
   border-color: #0d6efd;
+}
+
+.search {
+  display: flex;
+  gap: 5px;
+}
+
+.form-cart {
+  display: inline-block;
 }

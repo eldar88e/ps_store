@@ -1,15 +1,18 @@
 class GamesController < ApplicationController
   after_action :store_history, only: :show
+  before_action :set_game, only: :show
 
   def index
-    @games = Game.page(params[:page]).per(36)
+    @games = @q.result.order(created_at: :desc).page(params[:page]).per(36)
   end
 
-  def show
-    @game = Game.find(params[:id].to_i)
-  end
+  def show; end
 
   private
+
+  def set_game
+    @game = Game.find(params[:id].to_i)
+  end
 
   def store_history
     session[:history] ||= []
