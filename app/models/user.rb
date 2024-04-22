@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  has_many :orders, dependent: :destroy
+  #has_many :carts, dependent: :destroy
+
   def self.from_google(auth)
     user = find_by(provider: auth.provider, uid: auth.uid)
     return user if user

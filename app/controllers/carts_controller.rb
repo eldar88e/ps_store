@@ -57,14 +57,4 @@ class CartsController < ApplicationController
       turbo_stream.update(:cart_counter, partial: 'carts/cart_counter')
     ]
   end
-
-  private
-
-  def set_total_price
-    @total_price = @games.reduce(0) { |result, game| result + (game.price * cart_items.count(game.id)) }
-  end
-
-  def set_games
-      @games = Game.where(id: cart_items.uniq)
-  end
 end

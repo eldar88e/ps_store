@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Подтверждение заказа</h1>
+    <p>Здравствуйте, <%= @current_user.full_name %>!</p>
+    <p>Ваш заказ успешно создан. Номер вашего заказа: <%= @order.id %>.</p>
+
+    <table>
+      <% @order.order_items.each do |i| %>
+        <tr>
+          <td>
+            <img src="<%= i.game.img %>" alt="<%= i.game.name %>" style="width: 100px;" />
+          </td>
+          <td>
+            <p><%= i.game.name %></p>
+          </td>
+          <td>
+            <p><%= i.game.price %></p>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <p>Сумма заказа: <%= @order.order_items.pluck(:unit_price).sum %>.</p>
+    <p>Спасибо за покупку!</p>
+  </body>
+</html>

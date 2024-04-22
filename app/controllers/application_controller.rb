@@ -19,4 +19,12 @@ class ApplicationController < ActionController::Base
   def set_search
     @q = Game.ransack(params[:q])
   end
+
+  def set_games
+    @games = Game.where(id: cart_items.uniq)
+  end
+
+  def set_total_price
+    @total_price = @games.reduce(0) { |result, game| result + (game.price * cart_items.count(game.id)) }
+  end
 end
