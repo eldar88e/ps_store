@@ -1,8 +1,7 @@
 class ChangeClientReferenceToUserInOrders < ActiveRecord::Migration[7.1]
   def change
-    remove_reference :orders, :client, foreign_key: true
+    remove_foreign_key :orders, :clients
 
-    rename_column :orders, :client_id, :user_id
-    add_reference :orders, :user, foreign_key: true
+    add_foreign_key :orders, :users
   end
 end
