@@ -12,14 +12,28 @@ class User < ApplicationRecord
     user = find_by(provider: auth.provider, uid: auth.uid)
     return user if user
 
-    user = create(provider: auth.provider, uid: auth.uid) do |user|
-      user.provider   = auth.provider
-      user.uid        = auth.uid
-      user.email      = auth.info.email
-      user.password   = Devise.friendly_token[0, 20]
-      user.full_name  = auth.info.name
-      user.avatar_url = auth.info.image
-    end
+    user = create(
+      provider: auth.provider,
+      uid: auth.uid,
+      email: auth.info.email,
+      password: Devise.friendly_token[0, 20],
+      full_name: auth.info.name,
+      avatar_url: auth.info.image
+    )
+
+    UserMailer.welcome_email(user).deliver_now
+    user
+  end
+
+  def self.from_email(auth)
+    user = find_by(email: auth[:email])
+    return user if user
+
+    user = create(
+      email: auth[:email],
+      password: Devise.friendly_token[0, 20],
+      full_name: auth[:full_name],
+    )
 
     UserMailer.welcome_email(user).deliver_now
     user

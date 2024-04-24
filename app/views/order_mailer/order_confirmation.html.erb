@@ -9,22 +9,32 @@
     <p>Ваш заказ успешно создан. Номер вашего заказа: <%= @order.id %>.</p>
 
     <table>
+      <tr>
+        <td></td>
+        <td>Товар</td>
+        <td>Кол-во</td>
+        <td>Стоимость</td>
+      </tr>
       <% @order.order_items.each do |i| %>
         <tr>
           <td>
             <img src="<%= i.game.img %>" alt="<%= i.game.name %>" style="width: 100px;" />
           </td>
           <td>
-            <p><%= i.game.name %></p>
+            <p><%= link_to i.game.name, game_url(i.game), title: i.game.name, target: '_blank' %></p>
           </td>
           <td>
-            <p><%= i.game.price %></p>
+            <p><%= i.quantity %></p>
+          </td>
+          <td>
+            <p><%= i.game.price %> ₽</p>
           </td>
         </tr>
       <% end %>
     </table>
 
-    <p>Сумма заказа: <%= @order.order_items.pluck(:unit_price).sum %>.</p>
+    <p>Адрес доставки: <%= @order.address %></p>
+    <p>Сумма заказа: <%= @order.order_items.pluck(:unit_price).sum %> ₽</p>
     <p>Спасибо за покупку!</p>
   </body>
 </html>

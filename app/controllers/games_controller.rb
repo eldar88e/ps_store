@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: :show
 
   def index
-    @games = @q.result.order(created_at: :desc).page(params[:page]).per(36)
+    @games = @q.result.page(params[:page]).per(36)
   end
 
   def show; end

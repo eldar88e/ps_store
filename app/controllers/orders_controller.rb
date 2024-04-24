@@ -8,29 +8,29 @@ class OrdersController < ApplicationController
   end
 
   def create
-    if user_signed_in?
-      return redirect_to root_path, flash: { notice: "Корзина пуста" } if cart_items.blank?
+    user = user_signed_in? ? current_user : User.from_email(order_params)
+    return redirect_to root_path, flash: { notice: "Корзина пуста" } if cart_items.blank?
 
-      @order = current_user.orders.build(total_amount: @total_price)
-      if @order.save
-        @games.each do |game|
-          @order.order_items.build(product_type: game.class.to_s,
-                                   product_id: game.id,
-                                   quantity: cart_items.count(game.id),
-                                   unit_price: game.price).save
-        end
-        session[:cart_items] = []
-        OrderMailer.order_confirmation(@order, current_user).deliver_now
-      else
-        render turbo_stream: success_notice("Не удалось отправить заказ")
+    @order = user.orders.build(total_amount: @total_price, privacy: params[:order][:privacy],
+                               address: params[:order][:address])
+    if @order.save
+      @games.each do |game|
+        @order.order_items.build(product_type: game.class.to_s,
+                                 product_id: game.id,
+                                 quantity: cart_items.count(game.id),
+                                 unit_price: game.price).save
       end
+      session[:cart_items] = []
+      OrderMailer.order_confirmation(@order, user).deliver_now
+      redirect_to root_path, notice: 'Ваш заказ успешно отправлен.'
     else
-      # logic for not authorized users
+      render :new
     end
+  end
 
-    render turbo_stream: [
-      turbo_stream.update(:cart_counter, partial: 'carts/cart_counter'),
-      success_notice("Ваш заказ успешно отправлен.")
-    ]
+  private
+
+  def order_params
+    params.require(:order).permit(:full_name, :email, :phone, :address, :comments, :privacy)
   end
 end
