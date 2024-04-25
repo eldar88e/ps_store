@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     return redirect_to root_path, flash: { notice: "Корзина пуста" } if cart_items.blank?
 
     @order = user.orders.build(total_amount: @total_price, privacy: params[:order][:privacy],
-                               address: params[:order][:address])
+                               address: params[:order][:address], comments: params[:order][:comments])
     if @order.save
       @games.each do |game|
         @order.order_items.build(product_type: game.class.to_s,
