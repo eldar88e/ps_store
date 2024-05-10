@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :orders, dependent: :destroy
   #has_many :carts, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   def self.from_google(auth)
     user = find_by(provider: auth.provider, uid: auth.uid)
@@ -32,7 +33,7 @@ class User < ApplicationRecord
     user = create(
       email: auth[:email],
       password: Devise.friendly_token[0, 20],
-      full_name: auth[:full_name],
+      full_name: auth[:full_name]
     )
 
     UserMailer.welcome_email(user).deliver_now

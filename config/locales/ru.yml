@@ -1,0 +1,14 @@
+ru:
+  ru: "Русский"
+  en: "Английский"
+  tr: "Турецкий"
+  activerecord:
+    models:
+      user: "Пользователь"
+    attributes:
+      user:
+        email: "Почта"
+        password: "Пароль"
+      order:
+        privacy: "Конфиденциальность"
+        address: "Адрес"

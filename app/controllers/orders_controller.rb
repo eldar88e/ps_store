@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
       OrderMailer.order_confirmation(@order, user).deliver_now
       redirect_to root_path, notice: 'Ваш заказ успешно отправлен.'
     else
-      render :new
+      render turbo_stream: turbo_stream.update(:error_form, partial: 'partial/error', locals: { model: @order })
     end
   end
 

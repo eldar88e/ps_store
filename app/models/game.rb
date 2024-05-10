@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
   has_many :order_items, foreign_key: :product_id
+  has_many :favorites, dependent: :destroy
 
   def self.ransackable_attributes(auth_object = nil)
     %w[content name ps_id price old_price bonus_price img platform

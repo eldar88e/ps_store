@@ -1,0 +1,8 @@
+<% if model.errors.any? %>
+  <h4 style="color: #dc3545;">Ошибки:</h4>
+  <ul>
+    <% model.errors.full_messages.each do |message| %>
+      <li class="invalid-feedback block" style="display: list-item;"><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>

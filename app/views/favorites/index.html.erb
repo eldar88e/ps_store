@@ -1,0 +1,11 @@
+<h1>Избранные Игры</h1>
+
+<div class="row" id="game-list">
+  <% @favorites.each do |game| %>
+    <%= render 'games/game', game: game %>
+  <% end %>
+</div>
+
+<%= paginate @favorites, window: 1 %>
+
+<%= render '/games/recently' %>

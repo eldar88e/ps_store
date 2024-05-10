@@ -21,7 +21,7 @@
             <img src="<%= i.game.img %>" alt="<%= i.game.name %>" style="width: 100px;" />
           </td>
           <td>
-            <p><%= link_to i.game.name, game_url(i.game), title: i.game.name, target: '_blank' %></p>
+            <p><%= link_to i.game.name, game_url(id: i.game), title: i.game.name, target: '_blank' %></p>
           </td>
           <td>
             <p><%= i.quantity %></p>

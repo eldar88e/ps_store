@@ -1,0 +1,11 @@
+tr:
+  ru: "Rusca"
+  en: "Inglisce"
+  tr: "Türkçe"
+  activerecord:
+    models:
+      user: "Кullanıcı"
+    attributes:
+      user:
+        email: "E-Posta"
+        password: "Şifre"

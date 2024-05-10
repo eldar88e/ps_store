@@ -4,6 +4,11 @@ class GamesController < ApplicationController
 
   def index
     @games = @q.result.page(params[:page]).per(36)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @games }
+    end
   end
 
   def show; end

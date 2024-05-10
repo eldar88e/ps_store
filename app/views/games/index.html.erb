@@ -3,9 +3,7 @@
 <%= render partial: 'sort_games' %>
 
 <div class="row" id="game-list">
-  <%= turbo_stream.update 'game-list' do %>
-    <%= render @games %>
-  <% end %>
+  <%= render @games %>
 </div>
 
 <%= paginate @games, window: 1 %>
