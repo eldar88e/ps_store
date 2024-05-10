@@ -18,6 +18,8 @@
       </ul>
       <span class="price"><%= @game.price %>₽</span>
       <%= render 'carts/create_cart_item', game: @game %>
+
+      <%= render 'favorites/add_favorite', game: @game %>
     </div>
     <div class="description col-12">
       <h2>Описание.</h2>

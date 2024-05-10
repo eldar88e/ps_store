@@ -5,7 +5,7 @@ module ApplicationHelper
 
   def favorites
     if user_signed_in?
-      current_user.favorites
+      current_user.favorites.pluck(:game_id)
     else
       session[:favorites] ||= []
     end

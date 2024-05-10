@@ -1,6 +1,6 @@
 tr:
-  ru: "Rusca"
-  en: "Inglisce"
+  ru: "Rusça"
+  en: "İngilizce"
   tr: "Türkçe"
   activerecord:
     models:
