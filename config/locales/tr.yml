@@ -2,6 +2,12 @@ tr:
   ru: "Rusça"
   en: "İngilizce"
   tr: "Türkçe"
+  error:
+    one: "Hata"
+    other: "Hatalar"
+  games: "Oyunlar"
+  sign_in: "Giriş Yap"
+  sign_out: "Çıkış Yap"
   activerecord:
     models:
       user: "Кullanıcı"
@@ -9,3 +15,6 @@ tr:
       user:
         email: "E-Posta"
         password: "Şifre"
+      order:
+        privacy: "Gizlilik"
+        address: "Adres"

@@ -33,3 +33,7 @@ en:
   ru: "Russian"
   en: "English"
   tr: "Turkey"
+  error:
+    one: "Error"
+    other: "Errors"
+  games: "Games"

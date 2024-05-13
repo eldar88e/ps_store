@@ -23,6 +23,13 @@ class FavoritesController < ApplicationController
       end
     end
 
-    render turbo_stream: success_notice(msg)
+    render turbo_stream: [
+      success_notice(msg),
+      turbo_stream.update(
+        "game-#{params[:id]}",
+        partial: 'favorites/add_favorite',
+        locals: { id: params[:id], name: params[:game] }
+      )
+    ]
   end
 end

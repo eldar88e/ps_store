@@ -2,6 +2,12 @@ ru:
   ru: "Русский"
   en: "Английский"
   tr: "Турецкий"
+  error:
+    one: "Ошибка"
+    other: "Ошибки"
+  games: "Игры"
+  sign_in: "Войти"
+  sign_out: "Выход"
   activerecord:
     models:
       user: "Пользователь"

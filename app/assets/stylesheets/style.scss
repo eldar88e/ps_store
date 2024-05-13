@@ -304,18 +304,16 @@ li.page-item.page.current {
   gap: 5px;
 }
 
-.form-cart {
-  display: inline-block;
-}
-
 .favorite-btn {
-  padding: 0;
   line-height: 0;
-  border: none;
   background: none;
   color: #dc3545
 }
 
 span.btn.btn-outline-danger:hover .favorite-btn {
   color: #FFFFFF;
+}
+
+.title-game form {
+  display: inline-block;
 }

@@ -20,7 +20,9 @@
 
       <%= render 'carts/create_cart_item', game: game %>
 
-      <%= render 'favorites/add_favorite', game: game %>
+      <%= turbo_frame_tag "game-#{game.id}" do %>
+        <%= render partial: 'favorites/add_favorite', locals: { id: game.id, name: game.name } %>
+      <% end %>
     </div>
   </div>
 </div>

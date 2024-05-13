@@ -1,5 +1,5 @@
 <% if model.errors.any? %>
-  <h4 style="color: #dc3545;">Ошибки:</h4>
+  <h4 style="color: #dc3545;"><%= t(:error, count: model.errors.size) %>:</h4>
   <ul>
     <% model.errors.full_messages.each do |message| %>
       <li class="invalid-feedback block" style="display: list-item;"><%= message %></li>
