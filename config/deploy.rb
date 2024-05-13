@@ -5,6 +5,8 @@ set :application, "ps_store"
 set :repo_url, 'git@github.com:eldar88e/ps_store.git'
 set :branch, 'main'
 set :deploy_to, "/home/deploy/#{fetch :application}"
+set :linked_files, fetch(:linked_files, []).push('config/master.key')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads')
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
