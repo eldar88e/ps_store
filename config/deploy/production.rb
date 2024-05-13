@@ -61,4 +61,4 @@
 #   }
 server 'server.open-ps.ru',
        user: 'deploy',
-       roles: %w{app db web}
+       roles: %w{ app db web }
