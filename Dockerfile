@@ -22,6 +22,6 @@ COPY package.json yarn.lock /app/
 RUN yarn install --check-files
 
 COPY . /app/
-RUN cp -L config/master.key /app/config/master.key
+RUN cp -L ./config/master.key /app/config/master.key
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
