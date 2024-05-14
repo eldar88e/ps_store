@@ -1,19 +1,17 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.18.1"
 
-set :application, "ps_store"
+set :application, 'ps_store'
 set :repo_url, 'git@github.com:eldar88e/ps_store.git'
-set :branch, 'main'
-set :deploy_to, "/home/deploy/#{fetch :application}"
-set :linked_files, fetch(:linked_files, []).push('config/master.key', '.env')
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads')
-set :stage, :production
 
 # Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, `git rev-parse --abbrev-ref HEAD`.chomp # 'main'
 
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
+set :deploy_to, "/home/deploy/#{fetch :application}"
+set :linked_files, fetch(:linked_files, []).push('config/master.key', '.env')
+set :linked_dirs, fetch(:linked_dirs, []).push('log')
+
+# set :stage, :production
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -42,3 +40,29 @@ set :stage, :production
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+namespace :deploy do
+  current_path = "/home/deploy/ps_store/current"
+
+  desc 'Start docker-compose services'
+  task :start_docker_services do
+    on roles(:app) do
+      within current_path do
+        execute :docker, 'compose up --build'
+      end
+    end
+  end
+
+  desc 'Run Rails database migration'
+  task :run_db_migration do
+    on roles(:app) do
+      within current_path do
+        execute :docker, 'compose exec store rails db:migrate'
+      end
+    end
+  end
+
+  # Назначение задачи на выполнение после успешного развертывания
+  after :published, 'deploy:start_docker_services'
+  after :published, 'deploy:run_db_migration'
+end

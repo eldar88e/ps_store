@@ -29,7 +29,6 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'sendgrid-ruby'
 gem 'ransack', '~> 4.1'
-gem 'capistrano', '~> 3.18', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -38,6 +37,8 @@ group :development, :test do
   gem 'brakeman' # report vulnerabilities
   gem 'faker'
   gem 'pry'
+  gem 'capistrano', '~> 3.18', require: false
+  # gem "capistrano-rails", '~> 1.6', require: false
 end
 
 group :development do
