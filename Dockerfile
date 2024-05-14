@@ -22,7 +22,7 @@ COPY package.json yarn.lock /app/
 RUN yarn install --check-files
 
 COPY . /app/
-COPY ../share/config/master.key /app/config/master.key
-COPY ../share/.env /app/.env
+COPY ../../share/config/master.key /app/config/master.key
+COPY ../../share/.env /app/.env
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
