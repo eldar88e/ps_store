@@ -29,6 +29,7 @@ services:
       - pg
     volumes:
       - ./public:/app/public
+      - ./../../shared/.env:/app/.env
       - log:/app/log
       - gems:/usr/local/bundle
       - node_modules:/app/node_modules
