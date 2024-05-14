@@ -23,6 +23,6 @@ RUN yarn install --check-files
 
 COPY . /app/
 COPY ../../shared/config/master.key /app/config/master.key
-COPY ../../shared/.env /app/.env
+# COPY ../../shared/.env /app/.env
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
