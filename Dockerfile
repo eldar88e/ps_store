@@ -24,6 +24,6 @@ RUN yarn install --check-files
 COPY . /app/
 #COPY ./../../shared/config/master.key /app/config/master.key
 #COPY ./../../shared/.env /app/.env
-RUN echo "Результат ls -lah для ./../../shared:" && ls -lah ./../../shared
+RUN ls -lah ./shared
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
