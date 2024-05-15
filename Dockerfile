@@ -26,4 +26,4 @@ COPY . /app/
 # COPY ./../../shared/.env /app/.env
 
 #ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["./bin/ash"]
+CMD ["/bin/ash"]
