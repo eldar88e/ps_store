@@ -57,7 +57,7 @@ namespace :deploy do
   task :start_docker_services do
     on roles(:app) do
       within current_path do
-        execute :docker, 'compose up --build'
+        execute :docker, 'compose up --build -d'
       end
     end
   end
@@ -71,8 +71,18 @@ namespace :deploy do
     end
   end
 
+  desc 'Run Rails'
+  task :run_rails do
+    on roles(:app) do
+      within current_path do
+        execute :docker, 'compose exec store sh /app/docker-entrypoint.sh'
+      end
+    end
+  end
+
   # Назначение задачи на выполнение после успешного развертывания
   after :published, 'deploy:start_docker_services'
   after :published, 'deploy:start_copy_env'
   after :published, 'deploy:run_db_migration'
+  after :published, 'deploy:run_rails'
 end
