@@ -9,7 +9,7 @@ set :branch, `git rev-parse --abbrev-ref HEAD`.chomp # 'main'
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
 set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
-set :linked_dirs, fetch(:linked_dirs, []).push('log')
+#set :linked_dirs, fetch(:linked_dirs, []).push('log')
 
 # set :stage, :production
 
