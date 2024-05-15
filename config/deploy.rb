@@ -44,6 +44,15 @@ set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
 namespace :deploy do
   current_path = "/home/deploy/ps_store/current"
 
+  desc 'Copy .env to Docker container'
+  task :start_copy_env do
+    on roles(:app) do
+      within '/home/deploy/ps_store' do
+        execute "docker", "cp", "./.env", "store:/app"
+      end
+    end
+  end
+
   desc 'Start docker-compose services'
   task :start_docker_services do
     on roles(:app) do
@@ -63,6 +72,7 @@ namespace :deploy do
   end
 
   # Назначение задачи на выполнение после успешного развертывания
+  after :published, 'deploy:start_copy_env'
   after :published, 'deploy:start_docker_services'
   after :published, 'deploy:run_db_migration'
 end
