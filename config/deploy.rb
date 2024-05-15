@@ -72,7 +72,7 @@ namespace :deploy do
   end
 
   # Назначение задачи на выполнение после успешного развертывания
-  after :published, 'deploy:start_copy_env'
   after :published, 'deploy:start_docker_services'
+  after :published, 'deploy:start_copy_env'
   after :published, 'deploy:run_db_migration'
 end
