@@ -3,7 +3,7 @@ class Game < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[content name ps_id price old_price bonus_price img platform
+    %w[id content name ps_id price old_price bonus_price img platform created_at
        md5_hash deleted run_id touched_run_id genre rus_voice rus_screen nps_id]
   end
 
