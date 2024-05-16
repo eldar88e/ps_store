@@ -28,7 +28,7 @@ services:
     depends_on:
       - pg
     volumes:
-      - ./public:/app/public
+      - public:/app/public
       - log:/app/log
       - gems:/usr/local/bundle
       - node_modules:/app/node_modules
@@ -41,7 +41,7 @@ services:
     container_name: nginx-store
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./public:/app
+      - public:/app
     depends_on:
       - store
     networks:
@@ -64,6 +64,7 @@ volumes:
   redis:
   gems:
   log:
+  public:
 
 networks:
   store-net:
