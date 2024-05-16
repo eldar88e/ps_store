@@ -8,8 +8,8 @@ set :repo_url, 'git@github.com:eldar88e/ps_store.git'
 set :branch, `git rev-parse --abbrev-ref HEAD`.chomp # 'main'
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
-set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
-#set :linked_dirs, fetch(:linked_dirs, []).push('log')
+# set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
+# set :linked_dirs, fetch(:linked_dirs, []).push('log')
 
 # set :stage, :production
 
@@ -24,7 +24,7 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 # set :pty, true
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",  "public" # "storage", "vendor"
+# append :linked_dirs, "tmp/pids", "tmp/cache", "tmp/sockets" # "storage", "vendor"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
