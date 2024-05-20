@@ -85,7 +85,7 @@
               <%= button_to t(:sign_out), destroy_user_session_path, method: :delete, class: 'btn btn-primary' %>
             </div>
         <% else %>
-          <%= link_to t(:sign_in), new_user_session_path, class: 'btn btn-primary' %>
+          <%= link_to t(:sign_in), new_user_session_path, class: 'btn btn-primary', id: 'sign_in' %>
         <% end %>
       </div>
     </div>

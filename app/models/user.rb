@@ -39,4 +39,8 @@ class User < ApplicationRecord
     UserMailer.welcome_email(user).deliver_now
     user
   end
+
+  def self.create!(email:, password:)
+    # code here
+  end
 end
