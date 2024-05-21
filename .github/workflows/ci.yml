@@ -93,9 +93,6 @@ jobs:
       - name: Extract workspace
         run: tar zxf workspace.tar.gz
 
-      - name: Migrate database and run seed
-        run: bundle exec rails db:create db:schema:load db:seed RAILS_ENV=test
-
       - name: RSpec
         uses: ./.github/workflows/rspec
         env:

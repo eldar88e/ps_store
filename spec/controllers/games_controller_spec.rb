@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
-  let(:game) { Game.first }
+  let!(:game) { create(:game) }
 
   describe 'GET #index' do
     context 'with HTML format' do
@@ -41,6 +41,8 @@ RSpec.describe GamesController, type: :controller do
   end
 
   describe 'GET #show' do
+    let!(:viewed) { 2 }
+
     before do
       session[:history] = []
       get :show, params: { id: game.id }
@@ -58,9 +60,10 @@ RSpec.describe GamesController, type: :controller do
       expect(session[:history]).to include(game.id)
     end
 
-    it 'limits session history to 4 entries' do
-      4.times { |i| get :show, params: { id: i + 1 } }
-      expect(session[:history].size).to eq(4)
+    it "limits session history to viewed entries" do
+      create(:game)
+      Game.pluck(:id).each { |id| get :show, params: { id: id } }
+      expect(session[:history].size).to eq(viewed)
     end
   end
 end

@@ -38,6 +38,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'capistrano', '~> 3.18', require: false
+  gem 'factory_bot_rails'
   # gem "capistrano-rails", '~> 1.6', require: false
 end
 
@@ -46,7 +47,6 @@ group :development do
   gem 'better_errors' # Shows better errors description on errors page
   gem 'binding_of_caller'
   gem 'chusaku', require: false # annotations for routes
-  gem 'factory_bot_rails'
   gem 'letter_opener'
   gem 'listen' # Monitoring changes in files and directories in real-time
   gem 'rails-erd'
