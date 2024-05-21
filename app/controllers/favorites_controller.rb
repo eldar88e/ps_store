@@ -1,10 +1,12 @@
 class FavoritesController < ApplicationController
   include ApplicationHelper
 
+  # @route GET (/:locale)/favorites (favorites)
   def index
     @favorites = Game.where(id: favorites).page(params[:page]).per(36)
   end
 
+  # @route POST (/:locale)/favorites (favorites)
   def create
     if user_signed_in?
       favorite = current_user.favorites.build(game_id: params[:id])

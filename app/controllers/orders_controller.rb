@@ -3,10 +3,12 @@ class OrdersController < ApplicationController
   before_action :set_games, only: [:create]
   before_action :set_total_price, only: [:create]
 
+  # @route GET (/:locale)/orders/new (new_order)
   def new
     @order = Order.new
   end
 
+  # @route POST (/:locale)/orders (orders)
   def create
     user = user_signed_in? ? current_user : User.from_email(order_params)
     return redirect_to root_path, flash: { notice: "Корзина пуста" } if cart_items.blank?

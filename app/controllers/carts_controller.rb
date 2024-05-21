@@ -5,8 +5,10 @@ class CartsController < ApplicationController
   before_action :set_games, only: [:index]
   before_action :set_total_price, only: [:index]
 
+  # @route GET (/:locale)/cart (cart)
   def index; end
 
+  # @route POST (/:locale)/cart (cart)
   def create
     session[:cart_items] << params[:id].to_i
     game = params[:name]
@@ -19,6 +21,7 @@ class CartsController < ApplicationController
     ] # + cart_items_update
   end
 
+  # @route PATCH (/:locale)/cart/:id (edite_cart_items)
   def update
     if params[:action_cart] == 'up'
       session[:cart_items] << params[:id].to_i
@@ -30,6 +33,7 @@ class CartsController < ApplicationController
     redirect_to cart_path
   end
 
+  # @route DELETE (/:locale)/cart/:id (delete_cart_items)
   def destroy
     session[:cart_items].reject! { |num| num == params[:id].to_i }
     game = params[:name]
@@ -45,6 +49,7 @@ class CartsController < ApplicationController
     ]
   end
 
+  # @route DELETE (/:locale)/cart/delete_all (cart_delete_all)
   def delete_all
     session[:cart_items] = []
     set_games

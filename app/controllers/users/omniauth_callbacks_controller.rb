@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  # @route GET /users/auth/google_oauth2 (user_google_oauth2_omniauth_authorize)
+  # @route POST /users/auth/google_oauth2 (user_google_oauth2_omniauth_authorize)
   def passthru
     # render status: 404, plain: "Not Found"
     redirect_to root_path, alert: 'Аутентификация не удалась.'
@@ -8,6 +10,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to root_path, alert: 'Аутентификация не удалась.'
   end
 
+  # @route GET /users/auth/google_oauth2/callback (user_google_oauth2_omniauth_callback)
+  # @route POST /users/auth/google_oauth2/callback (user_google_oauth2_omniauth_callback)
   def google_oauth2
     user = User.from_google(request.env['omniauth.auth'])
 

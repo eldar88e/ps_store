@@ -2,6 +2,8 @@ class GamesController < ApplicationController
   after_action :store_history, only: :show
   before_action :set_game, only: :show
 
+  # @route GET (/:locale)/games (games)
+  # @route GET /(:locale) (root)
   def index
     @games = @q.result.page(params[:page]).per(36)
 
@@ -11,6 +13,7 @@ class GamesController < ApplicationController
     end
   end
 
+  # @route GET (/:locale)/games/:id (game)
   def show; end
 
   private
