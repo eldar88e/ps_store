@@ -3,45 +3,60 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  test:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        ruby:
-          - '3.2.2'
-    runs-on: ${{ matrix.os }}
-    services:
-      postgres:
-        image: postgres:16
-        ports:
-          - "5432:5432"
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-    env:
-      POSTGRES_DB: rails_test
-      POSTGRES_USER: rails
-      POSTGRES_PASSWORD: password
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+  build:
+    name: Build environment
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.6
-      - name: Install Ruby
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby 3.2.2
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Set up Chrome
+          ruby-version: 3.2.2
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Load yarn cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Load assets Cache
+        id: assets-cache
+        uses: actions/cache@v3
+        with:
+          path: public/assets
+          key: ${{ runner.os }}-assets-${{ hashFiles('app/assets/**') }}-${{ hashFiles('app/channels/**') }}-${{ hashFiles('app/javascript/**') }}
+
+      - name: Install npm packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libappindicator1 fonts-liberation
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome-stable_current_amd64.deb
-          sudo apt-get install -f
-      - name: Make DB
-        run: bundle exec rails db:reset
-      - name: Run tests
-        run:  bundle exec rspec
+          echo "Installing npm packages..."
+          yarn install
+
+      - name: Compile assets
+        if: steps.assets-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Precompiling assets..."
+          bundle exec rails assets:precompile
+
+      - name: Save workspace
+        run: |
+          echo "Compressing workspace..."
+          mkdir artefacts
+          tar -zcf artefacts/workspace.tar.gz --exclude=./artefacts .
+
+      - name: Upload workspace
+        uses: actions/upload-artifact@v3
+        with:
+          name: workspace.tar.gz
+          path: artefacts/workspace.tar.gz
+          retention-days: 1
