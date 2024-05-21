@@ -8,6 +8,7 @@ RSpec.describe 'User', type: :system do
       before { visit root_path }
 
       it "shows the login button" do
+        sleep 1
         expect(page).to have_link 'Войти', href: '/users/sign_in?locale=ru'
       end
     end
