@@ -1,11 +1,9 @@
-require 'capybara'
+require 'capybara/rspec'
 require 'devise'
 require 'spec_helper'
 require_relative '../config/environment'
 require 'rspec/rails'
 require 'rails-controller-testing'
-
-
 
 ENV['RAILS_ENV'] ||= 'test'
 
