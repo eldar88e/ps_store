@@ -18,8 +18,8 @@ gem 'pg'
 gem 'csv'
 gem 'dotenv-rails'
 gem 'rails-i18n'
-gem 'globalize'
-gem 'globalize-accessors'
+# gem 'globalize'
+# gem 'globalize-accessors'
 gem 'activeadmin'
 gem 'sassc-rails'
 gem 'kaminari'
@@ -34,27 +34,25 @@ gem 'ransack', '~> 4.1'
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem 'brakeman' # report vulnerabilities
+  gem 'brakeman' # static security analysis
   gem 'faker'
   gem 'pry'
   gem 'capistrano', '~> 3.18', require: false
   gem 'factory_bot_rails'
-  # gem "capistrano-rails", '~> 1.6', require: false
+  gem 'database_cleaner'
 end
 
 group :development do
-  gem 'annotate'
+  # gem 'annotate'
   gem 'better_errors' # Shows better errors description on errors page
-  gem 'binding_of_caller'
+  gem 'binding_of_caller' # For better errors: activates webconsole directly in browser
   gem 'chusaku', require: false # annotations for routes
   gem 'letter_opener'
-  gem 'listen' # Monitoring changes in files and directories in real-time
   gem 'rails-erd'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'web-console'
-  gem 'database_cleaner'
 end
 
 group :test do
@@ -64,6 +62,6 @@ group :test do
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
-  gem 'timecop'
-  gem 'webmock'
+  gem 'timecop' # work with Time
+  gem 'webmock' # emulate and intercept HTTP requests
 end
