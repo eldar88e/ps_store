@@ -18,7 +18,12 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.extend ControllerMacros, type: :controller
+  [:controller, :system, :request].each do |type|
+    config.extend ControllerMacros, type: type
+  end
+
+  config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Warden::Test::Helpers
 
   config.use_transactional_fixtures = true
 

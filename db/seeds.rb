@@ -5,10 +5,10 @@ if Rails.env.development?
   games.each do |game|
     data                  = {}
     data[:name]           = game[2]
-    data[:ps_id]          = game[0]
+    data[:ps_id]          = nil
     data[:price]          = game[3]
     data[:old_price]      = game[4]
-    data[:img]            = game[5]
+    data[:img]            = nil
     data[:genre]          = game[8]
     data[:content]        = game[9]
     data[:platform]       = game[10]

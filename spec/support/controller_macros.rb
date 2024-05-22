@@ -1,7 +1,7 @@
 module ControllerMacros
-  def login_user
+  def login_user(user=nil)
     before do
-      sign_in FactoryBot.create(:user)
+      sign_in user || FactoryBot.create(:user)
     end
   end
 end

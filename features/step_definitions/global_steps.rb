@@ -21,9 +21,10 @@ end
 end
 
 Когда /^Я залогинился как пользователь$/ do
-  # sleep 1
   visit '/users/sign_in'
   fill_in "user_email", with: @user.email
   fill_in "user_password", with: @user.password
-  # find('input[type="submit"]').click # click_button "Log In"
+  sleep 1
+  binding.pry
+  find('input[type="submit"]').click # click_button "Log In"
 end
