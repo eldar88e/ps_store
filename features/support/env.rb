@@ -1,5 +1,5 @@
 require 'cucumber/rails'
-require 'RSpec/rails'
+require 'rspec/rails'
 require Rails.root.join('spec', 'support', 'capybara')
 require 'database_cleaner/active_record'
 
