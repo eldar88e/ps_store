@@ -25,5 +25,7 @@ if Rails.env.development?
                     password: 'password',
                     password_confirmation: 'password') if Rails.env.development?
 
+  User.create(email: 'test@test.tt', password: '12345678')
+
   puts 'The Developments tables is populated!'
 end
