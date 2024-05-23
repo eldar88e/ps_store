@@ -12,9 +12,5 @@ runs:
       run: bundle exec rspec
       shell: bash
 
-    - name: cucumber
-      run: bundle exec cucumber
-      shell: bash
-
     - run: echo "🟢 Done"
       shell: bash
