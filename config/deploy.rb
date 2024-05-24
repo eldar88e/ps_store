@@ -63,6 +63,7 @@ namespace :deploy do
   task :run_db_migration do
     on roles(:app) do
       within current_path do
+        execute :docker, 'compose exec store bundle install'
         execute :docker, 'compose exec store rails db:migrate'
       end
     end
