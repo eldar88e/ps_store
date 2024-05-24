@@ -7,6 +7,9 @@ RUN apk --update add \
     tzdata \
     yarn \
     git \
+    libxml2-dev \
+    libxslt-dev \
+    libffi-dev \
     && rm -rf /var/cache/apk/*
 
 WORKDIR /app
@@ -14,7 +17,6 @@ WORKDIR /app
 COPY Gemfile* ./
 RUN gem update --system 3.5.10
 RUN gem install bundler -v $(tail -n 1 Gemfile.lock)
-RUN bundle config set without 'development test'
 RUN bundle check || bundle install
 
 COPY package.json yarn.lock ./
@@ -22,5 +24,5 @@ RUN yarn install --check-files
 
 COPY . ./
 
-# ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["./docker-entrypoint-test.sh"]
+# CMD ["tail", "-f", "/dev/null"]

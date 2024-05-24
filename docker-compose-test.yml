@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+
+  pg:
+    image: postgres:16.1
+    container_name: pg-store-test
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      TZ: Europe/Moscow
+    networks:
+      - store-net-test
+
+  store:
+    image: store-test
+    build:
+      context: .
+      dockerfile: ./Dockerfile-test
+    container_name: store-test
+    environment:
+      RAILS_ENV: test
+      TZ: Europe/Moscow
+    depends_on:
+      - pg
+    networks:
+      - store-net-test
+
+networks:
+  store-net-test:
