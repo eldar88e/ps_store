@@ -529,10 +529,8 @@ GEM
     zeitwerk (2.6.14)
 
 PLATFORMS
-  aarch64-linux
   arm-linux
   arm64-darwin
-  x86-linux
   x86_64-darwin
   x86_64-linux
 

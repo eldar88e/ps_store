@@ -11,20 +11,16 @@ RUN apk --update add \
 
 WORKDIR /app
 
-COPY Gemfile* /app/
-RUN gem update --system 3.5.9
+COPY Gemfile* ./
+RUN gem update --system 3.5.10
 RUN gem install bundler -v $(tail -n 1 Gemfile.lock)
-#RUN bundle config set path 'vendor/bundle'
-#RUN bundle config set without 'development test'
-RUN bundle config set --local with 'production'
+RUN bundle config set without 'development test'
 RUN bundle check || bundle install
 
-COPY package.json yarn.lock /app/
+COPY package.json yarn.lock ./
 RUN yarn install --check-files
 
-COPY . /app/
-# COPY ./../shared/config/master.key /app/config/master.key
-# COPY ./../../shared/.env /app/.env
+COPY . ./
 
 #ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["tail", "-f", "/dev/null"]
