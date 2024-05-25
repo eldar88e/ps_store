@@ -102,7 +102,7 @@ namespace :deploy do
   task :run_rails do
     on roles(:app) do
       within current_path do
-        execute :docker, 'compose exec store sh /app/docker-entrypoint.sh'
+        execute :docker, 'compose exec store /app/docker-entrypoint.sh'
       end
     end
   end
@@ -125,7 +125,7 @@ namespace :deploy do
   task :start_docker_test_services do
     on roles(:app) do
       within current_path do
-        execute :docker, 'compose -f docker-compose-test.yml up --build --no-cache -d'
+        execute :docker, 'compose -f docker-compose-test.yml up --build -d'
       end
     end
   end
@@ -143,7 +143,7 @@ namespace :deploy do
   task :run_test do
     on roles(:app) do
       within current_path do
-        execute :docker, 'compose exec store /app/docker-entrypoint-test.sh'
+        execute :docker, 'compose exec store-test /app/docker-entrypoint-test.sh'
       end
     end
   end
