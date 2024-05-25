@@ -18,10 +18,18 @@ jobs:
           bundler-cache: true
           ruby-version: 3.2.2
 
-      - name: Install Chrome
+      - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          apk add --no-cache \
+            build-base \
+            postgresql-dev \
+            postgresql-client \
+            tzdata \
+            yarn \
+            git \
+            chromium \
+            chromium-chromedriver \
+            && rm -rf /var/cache/apk/*
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
