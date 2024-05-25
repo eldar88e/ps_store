@@ -143,7 +143,7 @@ namespace :deploy do
   task :run_test do
     on roles(:app) do
       within current_path do
-        execute :docker, 'compose exec store sh /app/docker-entrypoint-test.sh'
+        execute :docker, 'compose exec store /app/docker-entrypoint-test.sh'
       end
     end
   end

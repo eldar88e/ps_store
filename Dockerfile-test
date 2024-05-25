@@ -9,9 +9,6 @@ RUN apk --update add \
     git \
     chromium \
     chromium-chromedriver \
-    # libxml2-dev \
-    # libxslt-dev \
-    # libffi-dev \
     && rm -rf /var/cache/apk/*
 
 WORKDIR /app
