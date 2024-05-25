@@ -125,7 +125,7 @@ namespace :deploy do
   task :start_docker_test_services do
     on roles(:app) do
       within current_path do
-        execute :docker, 'compose -f docker-compose-test.yml up --build -d'
+        execute :docker, 'compose -f docker-compose-test.yml up --build --no-cache -d'
       end
     end
   end

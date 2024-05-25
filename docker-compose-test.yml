@@ -18,6 +18,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile-test
+      args:
+        - BUILD_NO_CACHE=1
     container_name: store-test
     environment:
       RAILS_ENV: test
