@@ -23,6 +23,7 @@ jobs:
             git \
             chromium \
             chromium-chromedriver \
+            tar \
             && rm -rf /var/cache/apk/*
 
       - name: Install Bundler
