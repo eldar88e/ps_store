@@ -12,12 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby 3.2.2
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-          ruby-version: 3.2.2
-
       - name: Install dependencies
         run: |
           apk add --no-cache \
@@ -30,6 +24,12 @@ jobs:
             chromium \
             chromium-chromedriver \
             && rm -rf /var/cache/apk/*
+
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Bundle install
+        run: bundle install
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
