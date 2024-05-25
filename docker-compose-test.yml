@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
 
-  pg-store-test:
+  pg:
     image: postgres:16.1
     container_name: pg-store-test
     restart: always
@@ -25,7 +25,7 @@ services:
       RAILS_ENV: test
       TZ: Europe/Moscow
     depends_on:
-      - pg-store-test
+      - pg
     networks:
       - store-net-test
 
