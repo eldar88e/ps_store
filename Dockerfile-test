@@ -26,5 +26,5 @@ RUN yarn install --check-files
 
 COPY . ./
 
-ENTRYPOINT ["./docker-entrypoint-test.sh"]
-# CMD ["tail", "-f", "/dev/null"]
+# ENTRYPOINT ["./docker-entrypoint-test.sh"]
+CMD ["tail", "-f", "/dev/null"]

@@ -7,6 +7,7 @@ if [ -f tmp/pids/server.pid ]; then
 fi
 
 bundle exec rails assets:precompile
-bundle exec rails db:setup
+bundle exec rails db:prepare
+
 bundle exec rspec
 bundle exec cucumber
