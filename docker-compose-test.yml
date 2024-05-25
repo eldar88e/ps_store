@@ -25,7 +25,7 @@ services:
       RAILS_ENV: test
       TZ: Europe/Moscow
     depends_on:
-      - pg
+      - pg-store-test
     networks:
       - store-net-test
 
