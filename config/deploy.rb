@@ -100,7 +100,7 @@ namespace :deploy do
         invoke 'deploy:start_docker_test_services'
         invoke 'deploy:copy_env_test'
         invoke 'deploy:run_test'
-        invoke 'deploy:stop_rm_docker_test'
+        invoke 'deploy:down_docker_compose_test'
       end
 
       within "#{fetch(:deploy_to)}" do
@@ -116,6 +116,15 @@ namespace :deploy do
       within "#{fetch(:deploy_to)}" do
         execute :docker, 'stop store-test && docker rm store-test'
         execute :docker, 'stop pg-store-test && docker rm pg-store-test'
+      end
+    end
+  end
+
+  desc 'Down docker-compose-test'
+  task :down_docker_compose_test do
+    on roles(:app) do
+      within "#{fetch(:test_path)}" do
+        execute :docker, 'compose -f docker-compose-test.yml down'
       end
     end
   end
