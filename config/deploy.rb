@@ -42,25 +42,6 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 namespace :deploy do
   current_path = "#{fetch(:deploy_to)}/current"
 
-  ##### Test task ######
-  desc 'Deploy code without switching to current'
-  task :test do
-    on roles(:app) do
-      execute :mkdir, '-p', "#{fetch(:test_path)}"
-
-      within "#{fetch(:test_path)}" do
-        execute :git, "clone -b #{fetch(:branch)} #{fetch(:repo_url)} ."
-        invoke 'deploy:updated'
-        invoke 'deploy:start_docker_test_services'
-        invoke 'deploy:copy_env_test'
-        invoke 'deploy:run_test'
-        invoke 'deploy:stop_reset_docker_test'
-        execute :echo, '🟢 Successfully tested!'
-      end
-    end
-  end
-  ######## End Test task ########
-
   desc 'Copy .env to Docker container'
   task :copy_env do
     on roles(:app) do
@@ -108,11 +89,32 @@ namespace :deploy do
   end
 
   ####### Test ########
-  desc 'Stop and remove docker-compose-test services'
-  task :stop_reset_docker_test do
+  desc 'Deploy and run tests without switching to current'
+  task :test do
     on roles(:app) do
+      execute :mkdir, '-p', "#{fetch(:test_path)}"
+
       within "#{fetch(:test_path)}" do
-        execute :docker, 'stop store-test && rm docker rm store-test'
+        execute :git, "clone -b #{fetch(:branch)} #{fetch(:repo_url)} ."
+        invoke 'deploy:updated'
+        invoke 'deploy:start_docker_test_services'
+        invoke 'deploy:copy_env_test'
+        invoke 'deploy:run_test'
+        invoke 'deploy:stop_rm_docker_test'
+      end
+
+      within "#{fetch(:deploy_to)}" do
+        invoke 'deploy:cleanup_test_releases'
+        execute :echo, '🟢 Successfully tested!'
+      end
+    end
+  end
+
+  desc 'Stop and remove docker-test'
+  task :stop_rm_docker_test do
+    on roles(:app) do
+      within "#{fetch(:deploy_to)}" do
+        execute :docker, 'stop store-test && docker rm store-test'
         execute :docker, 'stop pg-store-test && docker rm pg-store-test'
       end
     end
@@ -141,6 +143,15 @@ namespace :deploy do
     on roles(:app) do
       within "#{fetch(:test_path)}" do
         execute :docker, 'compose exec store-test /app/docker-entrypoint-test.sh'
+      end
+    end
+  end
+
+  desc 'Remove all test releases'
+  task :cleanup_test_releases do
+    on roles(:app) do
+      within "#{fetch(:deploy_to)}/releases" do
+        execute :rm, '-rf', 'test_*'
       end
     end
   end
