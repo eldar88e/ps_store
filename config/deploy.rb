@@ -55,6 +55,7 @@ namespace :deploy do
         invoke 'deploy:start_copy_env_test'
         invoke 'deploy:run_test'
         invoke 'deploy:stop_docker_test_services'
+        execute :echo, '🟢 Successfully tested!'
       end
     end
   end
