@@ -11,4 +11,3 @@ bundle exec rails db:prepare
 
 bundle exec rspec
 bundle exec cucumber
-echo '🟢 Successfully tested!'

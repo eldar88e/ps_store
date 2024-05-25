@@ -8,6 +8,7 @@ set :repo_url, 'git@github.com:eldar88e/ps_store.git'
 set :branch, `git rev-parse --abbrev-ref HEAD`.chomp # 'main'
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
+set :release_path, "#{fetch(:deploy_to)}/releases/#{Time.now.to_i}"
 # set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
 # set :linked_dirs, fetch(:linked_dirs, []).push('log')
 
@@ -45,10 +46,9 @@ namespace :deploy do
   desc 'Deploy code without switching to current'
   task :no_switch do
     on roles(:app) do
-      release_path = "#{fetch(:deploy_to)}/releases/#{Time.now.to_i}"
       execute :mkdir, '-p', release_path
 
-      within release_path do
+      within "#{fetch(:release_path)}" do
         execute :git, "clone -b #{fetch(:branch)} #{fetch(:repo_url)} ."
         invoke 'deploy:updated'
         invoke 'deploy:start_docker_test_services'
@@ -112,7 +112,7 @@ namespace :deploy do
   desc 'Stop docker-compose-test services'
   task :stop_docker_test_services do
     on roles(:app) do
-      within current_path do
+      within "#{fetch(:deploy_to)}" do
         execute :docker, 'stop store-test'
         execute :docker, 'rm store-test'
         execute :docker, 'stop pg-store-test'
@@ -124,7 +124,7 @@ namespace :deploy do
   desc 'Start docker-compose-test services'
   task :start_docker_test_services do
     on roles(:app) do
-      within current_path do
+      within "#{fetch(:release_path)}" do
         execute :docker, 'compose -f docker-compose-test.yml up --build -d'
       end
     end
@@ -142,7 +142,7 @@ namespace :deploy do
   desc 'Run Tests'
   task :run_test do
     on roles(:app) do
-      within current_path do
+      within "#{fetch(:release_path)}" do
         execute :docker, 'compose exec store-test /app/docker-entrypoint-test.sh'
       end
     end
