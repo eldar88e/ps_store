@@ -108,14 +108,14 @@ jobs:
 
       - name: Load DB schema
         run: bundle exec rails db:prepare RAILS_ENV=test
-        shell: ash
+        shell: sh
         env:
           RAILS_ENV: test
           DATABASE_URL: "postgres://user:password@localhost:5432/ps_test"
 
       - name: rspec
         run: bundle exec rspec
-        shell: ash
+        shell: sh
         env:
           RAILS_ENV: test
           DATABASE_URL: "postgres://user:password@localhost:5432/ps_test"
