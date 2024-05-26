@@ -98,26 +98,6 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - name: Install dependencies
-        run: |
-          apk add --no-cache \
-            build-base \
-            postgresql-dev \
-            postgresql-client \
-            tzdata \
-            yarn \
-            git \
-            chromium \
-            chromium-chromedriver \
-            tar \
-            && rm -rf /var/cache/apk/*
-
-      - name: Install Bundler
-        run: gem install bundler
-
-      - name: Bundle install
-        run: bundle install
-
       - name: Download workspace
         uses: actions/download-artifact@v4
         with:
