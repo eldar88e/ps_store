@@ -28,6 +28,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install PostgreSQL client
+        run: |
+          apk add --no-cache postgresql-client
+
+      - name: Wait for PostgreSQL
+        run: |
+          until pg_isready -h postgres -p 5432; do
+            echo "Waiting for PostgreSQL..."
+            sleep 5
+          done
+
       - name: Install dependencies
         run: |
           apk add --no-cache \
@@ -37,9 +48,9 @@ jobs:
             tzdata \
             yarn \
             git \
-            tar \
             chromium \
             chromium-chromedriver \
+            tar \
             && rm -rf /var/cache/apk/*
 
       - name: Build App
@@ -50,13 +61,15 @@ jobs:
         run: |
           gem install bundler
           bundle install
-          run: bundle exec rails db:prepare
+          bundle exec rails db:migrate
           yarn install
           bundle exec rails assets:precompile
 
       - name: Run Tests
-        uses: ./.github/workflows/rspec
         env:
           RAILS_ENV: test
           DATABASE_URL: "postgres://admin:admin@postgres:5432/ps_test"
           PRODUCT_SETTINGS_PATH: ${{ github.workspace }}/product-settings.yml
+        run: |
+          bundle exec rspec --format documentation
+          bundle exec cucumber
