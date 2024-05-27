@@ -28,7 +28,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Building Ruby-image
+      - name: Build Ruby-image
         run: |
           apk add --no-cache postgresql-client
 
@@ -41,6 +41,7 @@ jobs:
             tzdata \
             yarn \
             git \
+            tar \
             chromium \
             chromium-chromedriver \
             && rm -rf /var/cache/apk/*
