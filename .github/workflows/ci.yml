@@ -28,6 +28,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install PostgreSQL client
+        run: |
+          apk add --no-cache postgresql-client
+
       - name: Wait for PostgreSQL
         run: |
           until pg_isready -h postgres -p 5432; do
