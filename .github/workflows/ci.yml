@@ -75,4 +75,4 @@ jobs:
           bundle exec cucumber
 
       - run: echo "🟢 Done"
-        shell: ash
+        shell: sh

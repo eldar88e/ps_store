@@ -10,11 +10,11 @@ runs:
   steps:
     - name: rspec
       run: bundle exec rspec --format documentation
-      shell: bash
+      shell: sh
 
     - name: cucumber
       run: bundle exec cucumber
-      shell: bash
+      shell: sh
 
     - run: echo "🟢 Done"
-      shell: bash
+      shell: sh
