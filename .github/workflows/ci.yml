@@ -32,13 +32,6 @@ jobs:
         run: |
           apk add --no-cache postgresql-client
 
-      - name: Wait for PostgreSQL
-        run: |
-          until pg_isready -h postgres -p 5432; do
-            echo "Waiting for PostgreSQL..."
-            sleep 5
-          done
-
       - name: Install dependencies
         run: |
           apk add --no-cache \
@@ -61,7 +54,6 @@ jobs:
         run: |
           gem install bundler
           bundle install
-          bundle exec rails db:setup
           bundle exec rails db:migrate
           yarn install
           bundle exec rails assets:precompile
