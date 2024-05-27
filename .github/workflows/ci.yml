@@ -6,6 +6,22 @@ jobs:
   build:
     name: Build environment
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: ps_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     container:
       image: ruby:3.2.2-alpine
     steps:
@@ -26,101 +42,23 @@ jobs:
             tar \
             && rm -rf /var/cache/apk/*
 
-      - name: Install Bundler
-        run: gem install bundler
-
-      - name: Bundle install
-        run: bundle install
-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Load yarn cache
-        uses: actions/cache@v4
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Load assets Cache
-        id: assets-cache
-        uses: actions/cache@v4
-        with:
-          path: public/assets
-          key: ${{ runner.os }}-assets-${{ hashFiles('app/assets/**') }}-${{ hashFiles('app/channels/**') }}-${{ hashFiles('app/javascript/**') }}
-
-      - name: Install npm packages
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
+      - name: Build App
+        env:
+          RAILS_ENV: test
+          WEB_PG_PWD: postgres
+          PRODUCT_SETTINGS_PATH: ${{ github.workspace }}/product-settings.yml
         run: |
-          echo "Installing npm packages..."
+          gem install bundler
+          bundle install
+          bundle exec rails db:setup
+          bundle exec rails db:migrate
           yarn install
-
-      - name: Compile assets
-        if: steps.assets-cache.outputs.cache-hit != 'true'
-        run: |
-          echo "Precompiling assets..."
           bundle exec rails assets:precompile
 
-      - name: Save workspace
+      - name: Run Tests
+        env:
+          RAILS_ENV: test
+          WEB_PG_PWD: postgres
+          PRODUCT_SETTINGS_PATH: ${{ github.workspace }}/product-settings.yml
         run: |
-          echo "Compressing workspace..."
-          mkdir artefacts
-          tar -zcf artefacts/workspace.tar.gz --exclude=./artefacts .
-
-      - name: Upload workspace
-        uses: actions/upload-artifact@v4
-        with:
-          name: workspace.tar.gz
-          path: artefacts/workspace.tar.gz
-          retention-days: 1
-
-  rspec:
-    name: RSpec
-    runs-on: ubuntu-latest
-    needs: build
-    container:
-      image: ruby:3.2.2-alpine
-    services:
-      db:
-        image: postgres:16
-        env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: ps_test
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-    steps:
-      - name: Download workspace
-        uses: actions/download-artifact@v4
-        with:
-          name: workspace.tar.gz
-      - name: Install Bundler
-        run: gem install bundler
-
-      - name: Bundle install
-        run: bundle install
-
-      - name: Extract workspace
-        run: tar zxf workspace.tar.gz
-
-      - name: Load DB schema
-        run: bundle exec rails db:prepare RAILS_ENV=test
-        shell: sh
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: "postgres://user:password@localhost:5432/ps_test"
-
-      - name: rspec
-        run: bundle exec rspec
-        shell: sh
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: "postgres://user:password@localhost:5432/ps_test"
+          bundle exec rspec --format documentation

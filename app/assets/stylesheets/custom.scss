@@ -72,6 +72,8 @@ img {
   }
 
   .title-game {
+    padding: 5px;
+
     a {
       height: 48px;
       display: block;
@@ -94,6 +96,10 @@ img {
   &:hover {
     border-color: #0d6efd;
     outline: 2px solid #9090ff59;
+  }
+
+  form {
+    display: inline-block;
   }
 }
 
@@ -322,12 +328,4 @@ li.page-item.page.current {
 
 span.btn.btn-outline-danger:hover .favorite-btn {
   color: #FFFFFF;
-}
-
-.title-game form {
-  display: inline-block;
-}
-
-.title-game {
-  padding: 5px;
 }
