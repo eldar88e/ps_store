@@ -46,22 +46,11 @@ jobs:
             tar \
             && rm -rf /var/cache/apk/*
 
-      - name: Install bundler
-        run: |
-          gem install bundler
-
-      - name: Load bundle Cache
-        uses: actions/cache@v4
+      - name: Set up Ruby 3.2.2
+        uses: ruby/setup-ruby@v1
         with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-
-      - name: Bundle install
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
+          bundler-cache: true
+          ruby-version: 3.2.2
 
       - name: Run migration
         run: |
