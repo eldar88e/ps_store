@@ -28,7 +28,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install PostgreSQL client
+      - name: Prepare Rails server
         run: |
           apk add --no-cache postgresql-client
 
@@ -54,15 +54,12 @@ jobs:
         run: |
           gem install bundler
           bundle install
-          bundle exec rails db:migrate
           yarn install
           bundle exec rails assets:precompile
 
       - name: Run Tests
+        uses: ./.github/workflows/rspec
         env:
           RAILS_ENV: test
           DATABASE_URL: "postgres://admin:admin@postgres:5432/ps_test"
           PRODUCT_SETTINGS_PATH: ${{ github.workspace }}/product-settings.yml
-        run: |
-          bundle exec rspec --format documentation
-          bundle exec cucumber
