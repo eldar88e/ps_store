@@ -65,7 +65,24 @@ jobs:
       - name: Build App
         run: |
           bundle exec rails db:migrate
+
+      - name: Load assets Cache
+        id: assets-cache
+        uses: actions/cache@v4
+        with:
+          path: public/assets
+          key: ${{ runner.os }}-assets-${{ hashFiles('app/assets/**') }}-${{ hashFiles('app/channels/**') }}-${{ hashFiles('app/javascript/**') }}
+
+      - name: Install npm packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Installing npm packages..."
           yarn install
+
+      - name: Compile assets
+        if: steps.assets-cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Precompiling assets..."
           bundle exec rails assets:precompile
 
       - name: Run Tests
