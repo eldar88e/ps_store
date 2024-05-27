@@ -4,10 +4,6 @@ description: Run RSpec test suite
 runs:
   using: "composite"
   steps:
-    - name: Load DB schema
-      run: bundle exec rails db:prepare
-      shell: bash
-
     - name: rspec
       run: bundle exec rspec --format documentation
       shell: bash

@@ -28,7 +28,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Prepare Rails server
+      - name: Building Ruby-image
         run: |
           apk add --no-cache postgresql-client
 
@@ -43,7 +43,6 @@ jobs:
             git \
             chromium \
             chromium-chromedriver \
-            tar \
             && rm -rf /var/cache/apk/*
 
       - name: Build App
@@ -54,6 +53,7 @@ jobs:
         run: |
           gem install bundler
           bundle install
+          run: bundle exec rails db:prepare
           yarn install
           bundle exec rails assets:precompile
 
