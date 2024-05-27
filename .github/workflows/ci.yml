@@ -66,8 +66,18 @@ jobs:
           bundle exec rails assets:precompile
 
       - name: Run Tests
-        uses: ./.github/workflows/rspec
         env:
           RAILS_ENV: test
           DATABASE_URL: "postgres://admin:admin@postgres:5432/ps_test"
           PRODUCT_SETTINGS_PATH: ${{ github.workspace }}/product-settings.yml
+
+      - name: rspec
+        run: bundle exec rspec --format documentation
+        shell: bash
+
+      - name: cucumber
+        run: bundle exec cucumber
+        shell: bash
+
+      - run: echo "🟢 Done"
+        shell: bash
