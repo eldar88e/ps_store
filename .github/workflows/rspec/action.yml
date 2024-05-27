@@ -1,6 +1,5 @@
 name: RSpec
 env:
-  RAILS_ENV: test
   DATABASE_URL: "postgres://admin:admin@postgres:5432/ps_test"
 description: Run RSpec test suite
 
