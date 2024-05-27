@@ -73,3 +73,4 @@ jobs:
           PRODUCT_SETTINGS_PATH: ${{ github.workspace }}/product-settings.yml
         run: |
           bundle exec rspec --format documentation
+          bundle exec cucumber
