@@ -24,6 +24,10 @@ jobs:
 
     container:
       image: ruby:3.2.2-alpine
+      env:
+        RAILS_ENV: test
+        DATABASE_URL: "postgres://admin:admin@postgres:5432/ps_test"
+        PRODUCT_SETTINGS_PATH: ${{ github.workspace }}/product-settings.yml
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -54,10 +58,6 @@ jobs:
             && rm -rf /var/cache/apk/*
 
       - name: Build App
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: "postgres://admin:admin@postgres:5432/ps_test"
-          PRODUCT_SETTINGS_PATH: ${{ github.workspace }}/product-settings.yml
         run: |
           gem install bundler
           bundle install
