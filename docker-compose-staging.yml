@@ -1,0 +1,72 @@
+version: "3.9"
+
+services:
+
+  pg:
+    image: postgres:16.1
+    container_name: pg-store-staging
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      TZ: Europe/Moscow
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - store-net
+
+  store:
+    image: store-staging
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: store
+    environment:
+      RAILS_ENV: production
+      TZ: Europe/Moscow
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - pg
+    volumes:
+      - public:/app/public
+      - log:/app/log
+      - gems:/usr/local/bundle
+      - node_modules:/app/node_modules
+    networks:
+      - store-net
+    restart: "unless-stopped"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-store-staging
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - public:/app
+    depends_on:
+      - store
+    networks:
+      - store-net
+      - proxy-net
+
+  redis:
+    image: redis:latest
+    container_name: redis-store-staging
+    command: redis-server
+    restart: always
+    networks:
+      - store-net
+    volumes:
+      - redis:/data
+
+volumes:
+  db_data:
+  node_modules:
+  redis:
+  gems:
+  log:
+  public:
+
+networks:
+  store-net:
+  proxy-net:
+    external: true
