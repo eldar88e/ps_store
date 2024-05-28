@@ -15,7 +15,7 @@ services:
     networks:
       - store-net
 
-  store:
+  store-staging:
     image: store
     build:
       context: .
@@ -43,7 +43,7 @@ services:
       - ./nginx-staging.conf:/etc/nginx/nginx.conf
       - public:/app
     depends_on:
-      - store
+      - store-staging
     networks:
       - store-net
       - proxy-net
