@@ -16,11 +16,11 @@ services:
       - store-net
 
   store:
-    image: store-staging
+    image: store
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: store
+    container_name: store-staging
     environment:
       RAILS_ENV: production
       TZ: Europe/Moscow
