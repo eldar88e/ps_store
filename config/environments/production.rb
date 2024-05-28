@@ -19,7 +19,7 @@ Rails.application.configure do
   }
 
   #Rails.application.routes.default_url_options[:host] = 'store.open-ps.ru'
-  config.hosts = %w[store.open-ps.ru store localhost staging.solncevdome.net]
+  config.hosts = %w[store.open-ps.ru store localhost staging.solncevdome.net store-staging]
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
