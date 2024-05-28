@@ -1,4 +1,4 @@
-if Rails.env.development?
+if true # Rails.env.development?
   games = CSV.read('./db/games.csv')
   games.shift
 
