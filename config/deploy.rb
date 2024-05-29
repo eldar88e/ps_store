@@ -1,13 +1,11 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.18.1"
 
-set :application, 'ps_store'
 set :repo_url, 'git@github.com:eldar88e/ps_store.git'
 
 # Default branch is :master
 set :branch, `git rev-parse --abbrev-ref HEAD`.chomp # 'main'
 
-set :deploy_to, "/home/deploy/#{fetch :application}"
 set :test_path, "#{fetch(:deploy_to)}/releases/test_#{Time.now.to_i}"
 # set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
 # set :linked_dirs, fetch(:linked_dirs, []).push('log')
@@ -42,15 +40,6 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 namespace :deploy do
   current_path = "#{fetch(:deploy_to)}/current"
 
-  desc 'Copy .env to Docker container'
-  task :copy_env do
-    on roles(:app) do
-      within "#{fetch(:deploy_to)}" do
-        execute "docker", "cp", "./.env", "store:/app"
-      end
-    end
-  end
-
   desc 'Start docker-compose services'
   task :start_docker_services do
     on roles(:app) do
@@ -60,30 +49,11 @@ namespace :deploy do
     end
   end
 
-  desc 'Run DB prepare'
-  task :run_db_prepare do
-    on roles(:app) do
-      within current_path do
-        #execute :docker, 'compose exec store bundle install'
-        execute :docker, 'compose exec store rails db:prepare'
-      end
-    end
-  end
-
   desc 'Stop old container and rails app'
   task :stop_old_container do
     on roles(:app) do
       within current_path do
         execute :docker, 'compose down'
-      end
-    end
-  end
-
-  desc 'Run Rails'
-  task :run_rails do
-    on roles(:app) do
-      within current_path do
-        execute :docker, 'compose exec store /app/docker-entrypoint.sh'
       end
     end
   end
