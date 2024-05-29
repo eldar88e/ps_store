@@ -1,3 +1,5 @@
+require 'pry'
+
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.18.1"
 
@@ -5,9 +7,6 @@ set :repo_url, 'git@github.com:eldar88e/ps_store.git'
 
 # Default branch is :master
 set :branch, `git rev-parse --abbrev-ref HEAD`.chomp # 'main'
-
-set :deploy_to, "/home/deploy/#{fetch :application}"
-set :current_path, "#{fetch(:deploy_to)}/current"
 
 set :test_path, "#{fetch(:deploy_to)}/releases/test_#{Time.now.to_i}"
 # set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
@@ -41,24 +40,6 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 # set :ssh_options, verify_host_key: :secure
 
 namespace :deploy do
-  desc 'Start docker-compose services'
-  task :start_docker_services do
-    on roles(:app) do
-      within "#{fetch(:current_path)}" do
-        execute :docker, 'compose up --build -d'
-      end
-    end
-  end
-
-  desc 'Stop old container and rails app'
-  task :stop_old_container do
-    on roles(:app) do
-      within "#{fetch(:current_path)}" do
-        execute :docker, 'compose down'
-      end
-    end
-  end
-
   ####### Test ########
   desc 'Deploy and run tests without switching to current'
   task :test do

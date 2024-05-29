@@ -13,7 +13,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
-      - store-net
+      - store-net-staging
 
   store-staging:
     image: store
@@ -33,7 +33,7 @@ services:
       - gems:/usr/local/bundle
       - node_modules:/app/node_modules
     networks:
-      - store-net
+      - store-net-staging
     restart: "unless-stopped"
 
   nginx:
@@ -45,7 +45,7 @@ services:
     depends_on:
       - store-staging
     networks:
-      - store-net
+      - store-net-staging
       - proxy-net
 
   redis:
@@ -54,7 +54,7 @@ services:
     command: redis-server
     restart: always
     networks:
-      - store-net
+      - store-net-staging
     volumes:
       - redis:/data
 
@@ -67,6 +67,6 @@ volumes:
   public:
 
 networks:
-  store-net:
+  store-net-staging:
   proxy-net:
     external: true
