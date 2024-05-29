@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
 
-  pg:
+  pg-staging:
     image: postgres:16.1
     container_name: pg-store-staging
     restart: always
@@ -26,7 +26,7 @@ services:
       TZ: Europe/Moscow
       REDIS_URL: redis://redis:6379/1
     depends_on:
-      - pg
+      - pg-staging
     volumes:
       - public:/app/public
       - log:/app/log
@@ -36,7 +36,7 @@ services:
       - store-net-staging
     restart: "unless-stopped"
 
-  nginx:
+  nginx-staging:
     image: nginx:latest
     container_name: nginx-store-staging
     volumes:
@@ -48,7 +48,7 @@ services:
       - store-net-staging
       - proxy-net
 
-  redis:
+  redis-staging:
     image: redis:latest
     container_name: redis-store-staging
     command: redis-server
