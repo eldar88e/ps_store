@@ -3,8 +3,6 @@ server 'server.open-ps.ru',
        roles: %w{ app db web }
 
 set :application, 'ps_store'
-set :deploy_to, "/home/deploy/#{fetch :application}"
-set :current_path, "#{fetch(:deploy_to)}/current"
 
 namespace :deploy do
   desc 'Copy .env to Docker container'

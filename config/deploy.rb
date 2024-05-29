@@ -6,6 +6,9 @@ set :repo_url, 'git@github.com:eldar88e/ps_store.git'
 # Default branch is :master
 set :branch, `git rev-parse --abbrev-ref HEAD`.chomp # 'main'
 
+set :deploy_to, "/home/deploy/#{fetch :application}"
+set :current_path, "#{fetch(:deploy_to)}/current"
+
 set :test_path, "#{fetch(:deploy_to)}/releases/test_#{Time.now.to_i}"
 # set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
 # set :linked_dirs, fetch(:linked_dirs, []).push('log')
