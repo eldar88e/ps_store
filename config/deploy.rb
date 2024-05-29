@@ -38,12 +38,10 @@ set :format_options, command_output: true, log_file: "log/capistrano.log", color
 # set :ssh_options, verify_host_key: :secure
 
 namespace :deploy do
-  current_path = "#{fetch(:deploy_to)}/current"
-
   desc 'Start docker-compose services'
   task :start_docker_services do
     on roles(:app) do
-      within current_path do
+      within "#{fetch(:current_path)}" do
         execute :docker, 'compose up --build -d'
       end
     end
@@ -52,7 +50,7 @@ namespace :deploy do
   desc 'Stop old container and rails app'
   task :stop_old_container do
     on roles(:app) do
-      within current_path do
+      within "#{fetch(:current_path)}" do
         execute :docker, 'compose down'
       end
     end

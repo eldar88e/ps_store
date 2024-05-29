@@ -4,10 +4,9 @@ server 'server.open-ps.ru',
 
 set :application, 'ps_store'
 set :deploy_to, "/home/deploy/#{fetch :application}"
+set :current_path, "#{fetch(:deploy_to)}/current"
 
 namespace :deploy do
-  current_path = "#{fetch(:deploy_to)}/current"
-
   desc 'Copy .env to Docker container'
   task :copy_env do
     on roles(:app) do
@@ -20,7 +19,7 @@ namespace :deploy do
   desc 'Run DB prepare'
   task :run_db_prepare do
     on roles(:app) do
-      within current_path do
+      within "#{fetch(:current_path)}" do
         #execute :docker, 'compose exec store bundle install'
         execute :docker, 'compose exec store rails db:prepare'
       end
@@ -30,7 +29,7 @@ namespace :deploy do
   desc 'Run Rails'
   task :run_rails do
     on roles(:app) do
-      within current_path do
+      within "#{fetch(:current_path)}" do
         execute :docker, 'compose exec store /app/docker-entrypoint.sh'
       end
     end
