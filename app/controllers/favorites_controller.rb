@@ -9,11 +9,17 @@ class FavoritesController < ApplicationController
   # @route POST (/:locale)/favorites (favorites)
   def create
     if user_signed_in?
-      favorite = current_user.favorites.build(game_id: params[:id])
-      if favorite.save
-        msg = "Товар #{ params[:game]} был успешно добавлен в избранное."
+      favorite = current_user.favorites.find_by(game_id: params[:id])
+      if favorite
+        favorite.destroy
+        msg = "Товар #{ params[:game]} был успешно удален из избранных."
       else
-        return error_notice(favorite.errors.full_messages)
+        favorite = current_user.favorites.build(game_id: params[:id])
+        if favorite.save
+          msg = "Товар #{ params[:game]} был успешно добавлен в избранное."
+        else
+          return error_notice(favorite.errors.full_messages)
+        end
       end
     else
       if favorites.include?(params[:id].to_i)
