@@ -18,10 +18,14 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  # Include FactoryBot methods
+  config.include FactoryBot::Syntax::Methods
+
   [:controller, :system, :request].each do |type|
     config.extend ControllerMacros, type: type
   end
 
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Warden::Test::Helpers
 
