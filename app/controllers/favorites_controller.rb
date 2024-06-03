@@ -30,14 +30,11 @@ class FavoritesController < ApplicationController
         msg = "Товар #{ params[:game]} был успешно добавлен в избранное."
       end
     end
-
     render turbo_stream: [
       success_notice(msg),
-      turbo_stream.update(
-        "game-#{params[:id]}",
-        partial: 'favorites/add_favorite',
-        locals: { id: params[:id], name: params[:game] }
-      )
+      turbo_stream.update(:favorite_counter, partial: 'favorites/favorite_counter'),
+      turbo_stream.update("game-#{params[:id]}", partial: 'favorites/add_favorite',
+                           locals: { id: params[:id].to_i, name: params[:game] })
     ]
   end
 end
