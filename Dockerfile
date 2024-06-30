@@ -1,18 +1,19 @@
 FROM ruby:3.2.2-alpine AS web
 
-RUN apk --update add \
+RUN apk --update add --no-cache \
     build-base \
     postgresql-dev \
     postgresql-client \
     tzdata \
     yarn \
     git \
+    libc6-compat \
     && rm -rf /var/cache/apk/*
 
 WORKDIR /app
 
 COPY Gemfile* ./
-RUN gem update --system 3.5.10
+RUN gem update --system 3.5.14
 RUN gem install bundler -v $(tail -n 1 Gemfile.lock)
 RUN bundle config set without 'development test'
 RUN bundle check || bundle install

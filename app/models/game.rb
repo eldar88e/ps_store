@@ -1,7 +1,12 @@
 class Game < ApplicationRecord
   has_many :order_items, foreign_key: :product_id
   has_many :favorites, dependent: :destroy
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+    attachable.variant :medium, resize_to_limit: [346, 346]
+    attachable.variant :large, resize_to_limit: [636, 636]
+    attachable.variant :full, resize_to_limit: [1024, 1024]
+  end
 
   def self.ransackable_attributes(auth_object = nil)
     %w[id content name ps_id price old_price bonus_price img platform created_at

@@ -5,3 +5,6 @@ application.register("hello", HelloController)
 
 import NoticesController from "./notices_controller"
 application.register("notices", NoticesController)
+
+import FancyboxController from "./fancybox_controller"
+application.register('fancybox', FancyboxController);

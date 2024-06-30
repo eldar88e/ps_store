@@ -3,7 +3,13 @@
     <div class="wrap-img">
       <a href="<%= game_path(game) %>" title="<%= game.name %>">
         <div class="no-img-game">
-          <div style="background-image: url('https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/<%= game.nps_id %>/0/image?w=346&h=346');" class="img-game">
+          <div style="background-image: url(<%=
+            if game.image.attached?
+              url_for(game.image.representation(resize_to_limit: [346, 346]))
+            else
+              "https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/#{game.nps_id}/0/image?w=346&h=346"
+            end
+          %>);" class="img-game">
           </div>
           <% if game.rus_screen || game.rus_voice %>
             <div class="ru-flag" title="Присутствует русская озвучка или субтитры."></div>
