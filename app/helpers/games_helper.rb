@@ -4,7 +4,7 @@ module GamesHelper
   end
 
   def storage_img(game, type)
-    size = { large: 1024, medium: 636, small: 346, thumb: 100 }
+    size = { thumb: 100, medium: 346, large: 636, full: 1024 }
     if game.image.attached? && game.image.blob.service.exist?(game.image.key)
       url_for(game.image.variant(type))
     else
