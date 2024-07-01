@@ -2,7 +2,7 @@ class ImageDownloadJob < ApplicationJob
   queue_as :default
 
   def perform(**args)
-    games = args[:count] ? Game.limit(args[:count]) : Game.all
+    games = args[:count] ? Game.order(:id).limit(args[:count]) : Game.order(:id).all
     games.each do |game|
       next if game.image.attached?
 
