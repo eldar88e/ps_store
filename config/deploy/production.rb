@@ -39,6 +39,7 @@ namespace :deploy do
     on roles(:app) do
       within "#{fetch(:deploy_to)}" do
         execute "docker", "cp", "./.env", "store:/app"
+        execute "docker", "cp", "./.env", 'sidekiq:/app'
       end
     end
   end
