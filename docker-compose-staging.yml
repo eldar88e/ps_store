@@ -51,7 +51,7 @@ services:
       - gems:/usr/local/bundle
       - .:/app
     networks:
-      - store-net
+      - store-net-staging
     restart: "unless-stopped"
 
   nginx-staging:
