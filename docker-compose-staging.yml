@@ -34,7 +34,7 @@ services:
       - store-net-staging
     restart: "unless-stopped"
 
-  sidekiq:
+  sidekiq-staging:
     image: store
     build:
       context: .
@@ -46,7 +46,7 @@ services:
       REDIS_URL: redis://redis:6379/0
     command: bundle exec sidekiq
     depends_on:
-      - redis
+      - redis-staging
     volumes:
       - gems:/usr/local/bundle
       - .:/app
