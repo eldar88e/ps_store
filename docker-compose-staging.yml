@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: admin
       TZ: Europe/Moscow
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data_store_st:/var/lib/postgresql/data
     networks:
       - store-net-staging
 
@@ -74,11 +74,11 @@ services:
     networks:
       - store-net-staging
     volumes:
-      - redis:/data
+      - redis_store_st:/data
 
 volumes:
-  db_data:
-  redis:
+  db_data_store_st:
+  redis_store_st:
   gems_store_st:
 
 networks:
