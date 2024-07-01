@@ -9,6 +9,8 @@ RUN apk --update add --no-cache \
     git \
     glib \
     libc6-compat \
+    vips \
+    vips-dev \
     && rm -rf /var/cache/apk/*
 
 WORKDIR /app
