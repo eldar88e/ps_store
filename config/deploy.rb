@@ -11,7 +11,7 @@ set :branch, `git rev-parse --abbrev-ref HEAD`.chomp # 'main'
 set :test_path, "#{fetch(:deploy_to)}/releases/test_#{Time.now.to_i}"
 # set :linked_files, fetch(:linked_files, []).push('.env') # 'config/master.key'
 # set :linked_dirs, fetch(:linked_dirs, []).push('log')
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public', 'storage')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public', 'storage', 'node_modules')
 
 # set :stage, :production
 
