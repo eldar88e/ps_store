@@ -1,8 +1,9 @@
 class ImageDownloadJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
-    Game.all.each do |game|
+  def perform(**args)
+    games = args[:count] ? Game.limit(args[:count]) : Game.all
+    games.each do |game|
       next if game.image.attached?
 
       url = "https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/#{game.nps_id}/0/image"
