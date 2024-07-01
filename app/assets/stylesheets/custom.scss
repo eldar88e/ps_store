@@ -329,3 +329,14 @@ li.page-item.page.current {
 span.btn.btn-outline-danger:hover .favorite-btn {
   color: #FFFFFF;
 }
+
+.buttons-show-game {
+  form {
+    display: inline-block;
+  }
+}
+
+.list-show-game {
+  list-style-type: none;
+  padding: 0;
+}

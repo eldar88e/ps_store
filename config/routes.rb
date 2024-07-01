@@ -1,10 +1,15 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
+
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  resources :users, only: [:show]
 
   scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
     get '/cart', to: 'carts#index'
@@ -14,12 +19,12 @@ Rails.application.routes.draw do
     patch	'/cart/:id', to:	'carts#update', as: 'edite_cart_items'
 
     resources :orders, only: [:new, :create]
-
-    devise_for :admin_users, ActiveAdmin::Devise.config
-    ActiveAdmin.routes(self)
-
     resources :games, only: [:index, :show]
+    resources :users, only: [:show]
     resources :favorites
+
+    get '/jobs', to: 'jobs#index'
+    post '/download_img', to: 'jobs#download_img', as: 'download_img'
 
     root 'games#index'
   end

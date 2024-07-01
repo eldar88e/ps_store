@@ -2,10 +2,8 @@ ActiveAdmin.register Game do
   index do
     selectable_column
     id_column
-    column "Image" do |id|
-      image_tag(
-        "https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/#{id.nps_id}/0/image?w=346&h=346",
-        height: '30')
+    column "Image" do |game|
+      image_tag(storage_img(game, :thumb), style: 'height: 30px')
     end
     column :name
     column :nps_id

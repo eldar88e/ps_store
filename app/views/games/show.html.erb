@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <ul>
+      <ul class="list-show-game">
         <li>Русский язык: <%= @game.rus_voice ? 'Да' : 'Нет' %></li>
         <li>Русский субтитры: <%= @game.rus_screen ? 'Да' : 'Нет' %></li>
         <li>Платформа: <%= @game.platform %></li>
@@ -18,10 +18,13 @@
         <li>Дата реализа: </li>
         <li>Издатель: </li>
       </ul>
-      <span class="price"><%= @game.price %>₽</span>
-      <%= render 'carts/create_cart_item', game: @game %>
 
-      <%= render 'favorites/add_favorite', id: @game.id, name: @game.name %>
+      <div class="price mb-3"><%= @game.price %>₽</div>
+
+      <div class="buttons-show-game">
+        <%= render 'carts/create_cart_item', game: @game %>
+        <%= render 'favorites/add_favorite', id: @game.id, name: @game.name %>
+      </div>
     </div>
     <div class="description col-12">
       <h2>Описание.</h2>

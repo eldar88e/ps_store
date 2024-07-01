@@ -4,7 +4,7 @@ class ImageDownloadJob < ApplicationJob
   def perform(**args)
     games = args[:count] ? Game.order(:id).limit(args[:count]) : Game.order(:id).all
     games.each do |game|
-      next if game.image.attached?
+      next if game.image.attached? && game.image.blob.service.exist?(game.image.key)
 
       url = "https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/#{game.nps_id}/0/image"
       sleep rand(0.5..2)
