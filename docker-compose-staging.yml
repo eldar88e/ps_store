@@ -50,7 +50,10 @@ services:
       - redis-staging
     volumes:
       - gems_store_st:/usr/local/bundle
-      - .:/app
+      - ./public:/app/public
+      - ./log:/app/log
+      - ./node_modules:/app/node_modules
+      - ./storage:/app/storage
     networks:
       - store-net-staging
     restart: "unless-stopped"
