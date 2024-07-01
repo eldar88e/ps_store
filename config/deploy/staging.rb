@@ -29,7 +29,7 @@ namespace :deploy do
   task :del_gem_vol do
     on roles(:app) do
       within "#{fetch(:current_path)}" do
-        execute :docker, 'volume rm ps_store_staging_gems'
+        execute :docker, 'volume rm current_gems_store_st'
       end
     end
   end
