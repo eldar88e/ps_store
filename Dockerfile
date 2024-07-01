@@ -7,6 +7,7 @@ RUN apk --update add --no-cache \
     tzdata \
     yarn \
     git \
+    glib \
     libc6-compat \
     && rm -rf /var/cache/apk/*
 
