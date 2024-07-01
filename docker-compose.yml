@@ -27,10 +27,10 @@ services:
       - pg
       - sidekiq
     volumes:
-      - public:/app/public
-      - log:/app/log
       - gems:/usr/local/bundle
-      - node_modules:/app/node_modules
+      - ./public:/app/public
+      - ./log:/app/log
+      - ./node_modules:/app/node_modules
       - ./storage:/app/storage
     networks:
       - store-net
@@ -52,11 +52,8 @@ services:
     depends_on:
       - redis
     volumes:
-      - public:/app/public
-      - log:/app/log
       - gems:/usr/local/bundle
-      - node_modules:/app/node_modules
-      - ./storage:/app/storage
+      - .:/app
     networks:
       - store-net
     restart: "unless-stopped"
@@ -66,7 +63,7 @@ services:
     container_name: nginx-store
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - public:/app
+      - ./public:/app
     depends_on:
       - store
     networks:
@@ -85,11 +82,8 @@ services:
 
 volumes:
   db_data:
-  node_modules:
   redis:
   gems:
-  log:
-  public:
 
 networks:
   store-net:

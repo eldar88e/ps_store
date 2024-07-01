@@ -25,6 +25,15 @@ namespace :deploy do
     end
   end
 
+  desc 'Remove gems volume'
+  task :del_gem_vol do
+    on roles(:app) do
+      within "#{fetch(:current_path)}" do
+        execute :docker, 'volume rm ps_store_staging_gems'
+      end
+    end
+  end
+
   desc 'Copy .env to Docker container'
   task :copy_env do
     on roles(:app) do
