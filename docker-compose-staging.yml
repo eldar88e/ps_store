@@ -68,6 +68,7 @@ services:
 
   redis-staging:
     image: redis:latest
+    hostname: redis
     container_name: redis-store-staging
     command: redis-server
     restart: always
