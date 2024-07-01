@@ -8,7 +8,7 @@ module GamesHelper
     if game.image.attached? && game.image.variant(type)
       url_for(game.image.variant(type))
     else
-      "https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/#{game.nps_id}/0/image?w=#{size[:type]}&h=#{size[:type]}"
+      "https://store.playstation.com/store/api/chihiro/00_09_000/container/TR/tr/99/#{game.nps_id}/0/image?w=#{size[type]}&h=#{size[type]}"
     end
   end
 end
