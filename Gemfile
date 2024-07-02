@@ -32,6 +32,7 @@ gem 'ransack', '~> 4.1'
 gem 'aws-sdk-s3'
 gem 'sidekiq'
 gem "image_processing"
+gem 'telegram-bot-ruby' # , "~> 0.19"
 
 group :development, :test do
   gem 'brakeman' # static security analysis
