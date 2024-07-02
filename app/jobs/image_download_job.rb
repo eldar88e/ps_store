@@ -12,6 +12,8 @@ class ImageDownloadJob < ApplicationJob
       response = Faraday.get(url)
       if response.status != 200
         Rails.logger.error("Error open img #{url}")
+        Rails.logger.error("Status: #{response.status}")
+        sleep 1
         next
       end
 

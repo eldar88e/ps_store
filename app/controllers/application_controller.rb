@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_search
-    @q = Game.ransack(params[:q])
+    @q = Game.order(:id).ransack(params[:q])
   end
 
   def set_games
