@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+         :recoverable, :rememberable, :validatable, :trackable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :orders, dependent: :destroy
@@ -22,7 +22,7 @@ class User < ApplicationRecord
       avatar_url: auth.info.image
     )
 
-    UserMailer.welcome_email(user).deliver_now
+    UserMailer.welcome_email(user).deliver_later
     user
   end
 
@@ -36,7 +36,7 @@ class User < ApplicationRecord
       full_name: auth[:full_name]
     )
 
-    UserMailer.welcome_email(user).deliver_now
+    UserMailer.welcome_email(user).deliver_later
     user
   end
 end
