@@ -22,10 +22,9 @@ services:
     environment:
       RAILS_ENV: production
       TZ: Europe/Moscow
-      REDIS_URL: redis://redis:6379/1
+      REDIS_URL: redis://redis:6379/0
     depends_on:
       - pg
-      - sidekiq
     volumes:
       - gems_store:/usr/local/bundle
       - ./public:/app/public
@@ -51,7 +50,10 @@ services:
       - redis
     volumes:
       - gems_store:/usr/local/bundle
-      - .:/app
+      - ./public:/app/public
+      - ./log:/app/log
+      - ./node_modules:/app/node_modules
+      - ./storage:/app/storage
     networks:
       - store-net
     restart: "unless-stopped"
