@@ -20,6 +20,7 @@ RUN gem update --system 3.5.14
 RUN gem install bundler -v $(tail -n 1 Gemfile.lock)
 RUN bundle config set without 'development test'
 RUN bundle check || bundle install
+RUN bundle clean --force
 
 COPY package.json yarn.lock ./
 RUN yarn install --check-files

@@ -3,6 +3,7 @@ services:
   pg-staging:
     image: postgres:16.1
     container_name: pg-store-staging
+    # hostname: pg
     restart: always
     environment:
       POSTGRES_USER: admin
@@ -15,14 +16,12 @@ services:
 
   store-staging:
     image: store
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    build: .
     container_name: store-staging
     environment:
       RAILS_ENV: production
       TZ: Europe/Moscow
-      REDIS_URL: redis://redis:6379/1
+      REDIS_URL: redis://redis:6379/0
     depends_on:
       - pg-staging
     volumes:
@@ -37,9 +36,7 @@ services:
 
   sidekiq-staging:
     image: store
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    build: .
     container_name: sidekiq-staging
     environment:
       RAILS_ENV: production
