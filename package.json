@@ -13,7 +13,8 @@
     "nodemon": "^3.0.2",
     "postcss": "^8.4.32",
     "postcss-cli": "^11.0.0",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "swiper": "^11.1.4"
   },
   "scripts": {
     "build": "esbuild app/javascript/application.js --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets --minify",

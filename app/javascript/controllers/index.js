@@ -8,3 +8,9 @@ application.register("notices", NoticesController)
 
 import FancyboxController from "./fancybox_controller"
 application.register('fancybox', FancyboxController);
+
+import PagyInitializerController from "./pagy_initializer_controller";
+application.register('pagy_initializer', PagyInitializerController);
+
+import SwiperController from "./swiper_controller";
+application.register('swiper', SwiperController);

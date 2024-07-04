@@ -18,7 +18,7 @@
       <% @order.order_items.each do |i| %>
         <tr>
           <td>
-            <img src="<%= i.game.img %>" alt="<%= i.game.name %>" style="width: 100px;" />
+            <img src="<%= storage_img(i.game, :thumb) %>" alt="<%= i.game.name %>" style="width: 80px;" />
           </td>
           <td>
             <p><%= link_to i.game.name, game_url(id: i.game), title: i.game.name, target: '_blank' %></p>
