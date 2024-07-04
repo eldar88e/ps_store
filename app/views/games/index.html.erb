@@ -1,11 +1,16 @@
-<h1><%= t :games %></h1>
+<% content_for :title do %>
+  <%= t :games %>
+<% end %>
 
 <%= render partial: 'sort_games' %>
 
-<div class="row" id="game-list">
-  <%= render @games %>
-</div>
+<%= turbo_frame_tag :games do %>
+  <div class="row" id="game-list">
+    <%= render @games %>
+  </div>
 
-<%= paginate @games, window: 1 %>
+  <%== pagy_bootstrap_nav(@pagy, aria_label: 'Search result pages') if @pagy.pages > 1 %>
+  <%== pagy_info(@pagy) %>
+<% end %>
 
 <%= render 'recently' %>

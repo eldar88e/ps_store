@@ -5,7 +5,7 @@ class GamesController < ApplicationController
   # @route GET (/:locale)/games (games)
   # @route GET /(:locale) (root)
   def index
-    @games = @q.result.page(params[:page]).per(36)
+    @pagy, @games = pagy(@q.result, items: 36, size: [1, 2, 2, 1])
 
     respond_to do |format|
       format.html

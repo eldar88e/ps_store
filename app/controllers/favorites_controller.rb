@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
 
   # @route GET (/:locale)/favorites (favorites)
   def index
-    @favorites = Game.where(id: favorites).page(params[:page]).per(36)
+    @pagy, @favorites = pagy(Game.where(id: favorites))
   end
 
   # @route POST (/:locale)/favorites (favorites)

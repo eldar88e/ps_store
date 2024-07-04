@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def cart_items
     session[:cart_items] ||= []
   end
