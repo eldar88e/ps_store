@@ -14,3 +14,6 @@ application.register('pagy_initializer', PagyInitializerController);
 
 import SwiperController from "./swiper_controller";
 application.register('swiper', SwiperController);
+
+import RecentlySwiperController from "./recently_swiper_controller";
+application.register('recently_swiper', RecentlySwiperController);

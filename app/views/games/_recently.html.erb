@@ -1,10 +1,15 @@
 <% if recently.present? %>
   <div class="recently">
     <h2>Недавно смотрели:</h2>
-    <div class="row">
-      <% recently.each do |game| %>
-        <%= render 'games/game', game: game %>
-      <% end %>
+    <div class="swiper recently_swiper" data-controller="recently_swiper">
+      <div class="swiper-wrapper">
+        <% recently.each do |game| %>
+          <%= render 'games/game_slider', game: game %>
+        <% end %>
+      </div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
   </div>
 <% end %>

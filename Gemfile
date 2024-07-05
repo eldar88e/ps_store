@@ -33,6 +33,7 @@ gem 'aws-sdk-s3'
 gem 'sidekiq'
 gem "image_processing"
 gem 'telegram-bot-ruby' # , "~> 0.19"
+gem 'breadcrumbs_on_rails'
 
 group :development, :test do
   gem 'brakeman' # static security analysis

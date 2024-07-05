@@ -1,0 +1,26 @@
+<div class="item-game">
+  <div class="wrap-img">
+    <a href="<%= game_path(game) %>" title="<%= game.name %>">
+      <div class="no-img-game">
+        <div style="background-image: url(<%= storage_img(game, :medium) %>);" class="img-game"></div>
+
+        <% if game.rus_screen || game.rus_voice %>
+          <div class="ru-flag" title="Присутствует русская озвучка или субтитры."></div>
+        <% end %>
+
+        <div class="platform <%= game.platform&.downcase=='ps5' ? 'ps5' : ('ps4' if game.platform&.downcase=='ps4') %>" title="Поддерживаемые платформы: <%= game.platform %>"></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="title-game">
+    <%= link_to game.name, game_path(game), title: game.name %>
+    <div class="price"><%= game.price %>₽</div>
+
+    <%= render 'carts/create_cart_item', game: game %>
+
+    <%= turbo_frame_tag "game-#{game.id}" do %>
+      <%= render partial: 'favorites/add_favorite', locals: { id: game.id, name: game.name } %>
+    <% end %>
+  </div>
+</div>

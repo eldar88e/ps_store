@@ -123,6 +123,8 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.1.2)
       racc
+    breadcrumbs_on_rails (4.1.0)
+      railties (>= 5.0)
     builder (3.2.4)
     capistrano (3.18.1)
       airbrussh (>= 1.0.0)
@@ -612,6 +614,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   brakeman
+  breadcrumbs_on_rails
   capistrano (~> 3.18)
   capybara
   chusaku
